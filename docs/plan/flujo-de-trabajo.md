@@ -43,7 +43,7 @@ El trabajo se organiza en [sprints de 2 semanas](sprints.md) y se gestiona en el
 - Cada sigla o término técnico nuevo va al [glosario](../glosario.md) en la misma sesión.
 - Opcional en semana 8: migrar a MkDocs + GitHub Pages (reutiliza los mismos `.md`).
 
-## 4.6 Uso del asistente (Claude)
+## 4.6 Uso del asistente
 
 - El código lo escribe el equipo.
 - Se consulta para: explicar conceptos, revisar código, proponer mejoras y detectar errores.
