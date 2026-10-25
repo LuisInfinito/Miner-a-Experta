@@ -104,3 +104,9 @@ Formato: fecha · decisión · alternativas consideradas · por qué.
 **Decisión:** las tareas que no tocan archivos del repositorio (solo el tablero o la configuración de GitHub) se cierran directamente, sin PR, y la excepción se anota en la bitácora. Las tareas con cambios en el repositorio siguen pasando por PR revisado.
 **Por qué:** la DoD exige PR para todas las tareas, pero el tablero no vive en el repositorio; pedir un PR sin cambios reales sería trámite vacío.
 
+## D20 — Contrato JSON de la mina estática, versión 1
+**Fecha:** 2026-10-25
+**Decisión:** usar `version`, `nombre`, `nodos` y `aristas`. Los nodos tienen `id`, `x`, `y`, `nivel` (coordenadas en metros) y `tipo`; las aristas tienen `id`, `origen`, `destino` y `longitud_m`. Los tipos son `interseccion`, `salida`, `refugio` y `frente`. Los túneles son bidireccionales, sin bucles ni pares repetidos; sus longitudes físicas son positivas y al menos la distancia recta 3D. Superficie en cota 0, subsuelo en cotas negativas. Sensores, mineros, emergencias y umbrales quedan separados de la estructura fija.
+**Alternativas:** derivar siempre la longitud de las coordenadas; permitir túneles dirigidos desde el primer entregable; mezclar estado de emergencia y geometría en un archivo.
+**Por qué:** permite túneles cuyo recorrido supera la línea recta, conserva la futura heurística admisible y evita mezclar datos permanentes con inferencias. El esquema valida la estructura; S1-11 validará referencias, unicidad, geometría, conectividad y la restricción D10 de 500 m por recorrido. Detalles en [S1-08](plan/esquema-mina.md) y contrato en [mina.schema.json](../data/esquemas/mina.schema.json).
+
