@@ -80,7 +80,7 @@ Cuando detectes algo que valga la pena recordar, PROPÓNLO al final de tu respue
   "cierre de sprint") → ofrece ejecutar /retro antes de seguir con otra tarea.
 - Si docs/contexto.md tiene más de 60 líneas o una trampa lleva más de un sprint
   sin ser relevante → propón la poda aunque no sea fin de sprint.
-- Criterio (Además puedes sugerir cambios según tu criterio)
+- Sugerencia (Además puedes sugerir cambios según tu criterio)
 
 ### Cómo proponer
 Usa exactamente este formato, máximo 2 propuestas por respuesta:
