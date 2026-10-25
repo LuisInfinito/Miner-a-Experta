@@ -30,6 +30,21 @@ Una entrada por sesión, la más reciente arriba. Tres líneas bastan.
 
 ## Sesiones
 
+### 2026-10-25 · Preparación de S1-04 · duración no registrada
+- Hice: añadí `requirements-dev.txt` y la guía multiplataforma de instalación, comprobación de rama y revisión por PR; preparé la rama `luis/s1-04-nivelacion`. La instalación, la comprobación de dependencias y las 14 pruebas pasaron.
+- Falló / dudas: la API de GitHub devolvió `Forbidden`; no se pudo consultar la tarjeta ni abrir el PR automáticamente. La publicación de la rama se comprueba por separado; no se considera completada S1-04 sin revisión del compañero.
+- Siguiente paso exacto: abrir el PR de esta rama en el fork, vincular la issue correcta y obtener revisión; después continuar con S1-02 (clases y módulos).
+
+### 2026-10-25 · Soluciones verificadas de S1-01 · duración no registrada
+- Hice: por petición del usuario, implementé los tres ejercicios en `ejercicios/nivelacion.py` y sus comprobaciones en `tests/test_nivelacion.py`; la ejecución de consola produjo los resultados esperados y pasaron 14 casos con pytest.
+- Falló / dudas: ninguna falla en los casos ejecutados. Falta que el integrante revise y explique las soluciones para acreditar el aprendizaje; no se cerraron tarjetas ni se publicó en GitHub.
+- Siguiente paso exacto: revisar las soluciones de S1-01 y después practicar S1-04 (rama y PR), antes de S1-02 según el orden sugerido. La aplicación sigue sin implementar.
+
+### 2026-10-25 · Inicio de S1-01 en el fork · duración no registrada
+- Hice: revisamos el plan y preparamos una guía de nivelación de Python con tres ejercicios del dominio, casos de comprobación y ejecución en el entorno virtual existente.
+- Falló / dudas: no hay soluciones del integrante que revisar todavía; S1-01 continúa pendiente. No se implementó código de la aplicación ni se modificó el tablero del equipo.
+- Siguiente paso exacto: resolver el ejercicio 1 de `docs/plan/nivelacion-python.md`, ejecutarlo con sus tres entradas y revisar el resultado antes de continuar con los ejercicios 2 y 3.
+
 ### 2026-10-24 · Tablero del sprint 1 · 2 h
 - Hice: cerramos S1-00, S1-03 y S1-03b; configuramos GitHub Projects (columnas, campos, etiquetas, workflows) y cargamos las 27 tarjetas del sprint 1 con dueño, estimación, prioridad e iteración.
 - Falló / dudas: S1-03 y S1-03b son de infraestructura y no pasan por PR (excepción consciente a la DoD). Horas estimadas, sin medir: ~2,5 h brutas y ~1,75 h productivas.

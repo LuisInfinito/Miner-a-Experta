@@ -15,6 +15,8 @@ Este README es la portada. La documentación se lee como un informe, en orden:
 4. [Flujo de trabajo](docs/plan/flujo-de-trabajo.md)
 5. [Sprints](docs/plan/sprints.md)
 6. [Tablero Kanban](docs/plan/kanban.md)
+7. [S1-01: nivelación de Python](docs/plan/nivelacion-python.md)
+8. [S1-04: práctica de rama y revisión](docs/plan/practica-git.md)
 
 ### Parte II — Desarrollo (un capítulo por semana)
 - [Semana 1](docs/capitulos/semana-01.md)
@@ -50,4 +52,12 @@ mina-experta/
 
 ## Ejecución
 
-*(se completa cuando exista el primer entregable funcional)*
+La aplicación todavía no está implementada. Los ejercicios de nivelación de S1-01 se ejecutan desde la raíz del repositorio con el entorno virtual preparado:
+
+```bash
+.venv/bin/python -m pip install -r requirements-dev.txt
+.venv/bin/python ejercicios/nivelacion.py
+.venv/bin/python -m pytest -q
+```
+
+Consulta la [guía de nivelación](docs/plan/nivelacion-python.md) para los objetivos y los casos esperados.
