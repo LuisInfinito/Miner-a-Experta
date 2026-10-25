@@ -1,6 +1,6 @@
 # Sistema Experto para Emergencias y Evacuación en Minería Subterránea
 
-Proyecto del curso **Sistemas Expertos**. Equipo: 2 integrantes. Lenguaje: Python.
+Proyecto del curso **Sistemas Expertos**. Proyecto original de 2 integrantes; este fork se desarrolla individualmente con ayuda del asistente. Lenguaje: Python.
 
 Sistema que, ante una emergencia simulada en una mina metálica subterránea, **infiere el estado de riesgo** con un motor de reglas propio (forward chaining), **calcula rutas de evacuación** para varios mineros y **explica cada decisión**.
 
@@ -23,6 +23,7 @@ Este README es la portada. La documentación se lee como un informe, en orden:
 12. [S1-08: esquema JSON de la mina](docs/plan/esquema-mina.md)
 13. [S1-09: mina académica de prueba](docs/plan/mina-prueba.md)
 14. [S1-10: modelo de la mina en Python](docs/plan/modelo-mina.md)
+15. [Sprint 1: cargador y motor mínimo](docs/plan/entregable-minimo.md)
 
 ### Parte II — Desarrollo (un capítulo por semana)
 - [Semana 1](docs/capitulos/semana-01.md)
@@ -58,10 +59,11 @@ mina-experta/
 
 ## Ejecución
 
-La aplicación todavía no está implementada. Los ejercicios de nivelación de S1-01 se ejecutan desde la raíz del repositorio con el entorno virtual preparado:
+El entregable mínimo ya carga la mina, ejecuta una cadena de tres reglas de CO con traza y admite cierres por incendio o derrumbe reportados (cinco reglas en total). Todavía no calcula rutas de evacuación. Desde la raíz del repositorio, con el entorno virtual preparado:
 
 ```bash
 .venv/bin/python -m pip install -e . -r requirements-dev.txt
+.venv/bin/python -m mina_experta --co tunel_1_2=120 --co tunel_2_3=20
 .venv/bin/python ejercicios/nivelacion.py
 .venv/bin/python -m ejercicios.clases
 .venv/bin/python -m ejercicios.mina_en_memoria

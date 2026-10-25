@@ -88,4 +88,69 @@ El O₂ funciona al revés (el peligro es que **falte**), por eso no sigue el cr
 
 ## Reglas
 
-*(se completan a partir de la semana 3)*
+Cadena mínima de CO para el entregable del sprint 1. Las tres reglas se instancian por entidad, sin mezclar hechos de túneles diferentes. Usan `>` estricto: exactamente 25, 50 y 100 ppm no activan respectivamente el siguiente escalón. Los niveles se leen de `data/configuracion/umbrales.json`; sus valores iniciales son los de D09/D12. Las conclusiones de los escalones anteriores se conservan como justificaciones, no como niveles mutuamente excluyentes.
+
+### R01 — Diagnóstico de alerta por CO
+
+| Campo | Valor |
+|---|---|
+| Categoría | DIAG |
+| SI | `co_ppm > co_ppm.alerta` (inicialmente 25 ppm) |
+| ENTONCES | Añadir `(entidad, alerta_co, True)` |
+| Prioridad | 30 |
+| Fuente | Anexo 15, ítem 33 (TWA de CO: 25 ppm); política de simulación D09 |
+| Tipo de fuente | SUPUESTO: clasificación instantánea basada en un valor normativo ocupacional |
+| Justificación | Hace explícito el primer escalón del razonamiento sin cerrar un túnel solo por exceder un TWA. |
+| Prueba | `tests/test_conocimiento.py::test_cadena_y_fronteras_co` |
+
+### R02 — Riesgo alto por CO encadenado
+
+| Campo | Valor |
+|---|---|
+| Categoría | RIESGO |
+| SI | `alerta_co == True` y `co_ppm > co_ppm.riesgo_alto` (inicialmente 50 ppm), en la misma entidad |
+| ENTONCES | Añadir `(entidad, riesgo_alto_co, True)` |
+| Prioridad | 20 |
+| Fuente | D12: 2 × TWA para CO, que no tiene STEL en el catálogo |
+| Tipo de fuente | SUPUESTO |
+| Justificación | Separa la alerta de un riesgo más alto y utiliza explícitamente la conclusión anterior. |
+| Prueba | `tests/test_conocimiento.py::test_cadena_y_fronteras_co` |
+
+### R03 — Cierre por peligro inmediato de CO
+
+| Campo | Valor |
+|---|---|
+| Categoría | RUTA |
+| SI | `riesgo_alto_co == True` y `co_ppm > co_ppm.peligro_inmediato` (inicialmente 100 ppm), en la misma entidad |
+| ENTONCES | Añadir `(entidad, cerrado, True)`; el futuro planificador consumirá el cierre |
+| Prioridad | 10 |
+| Fuente | D12: 2 × riesgo alto |
+| Tipo de fuente | SUPUESTO |
+| Justificación | Reserva el cierre para el último escalón de la simulación, conservando la cadena de justificación. |
+| Prueba | `tests/test_conocimiento.py::test_cadena_y_fronteras_co` |
+
+### R04 — Cierre por incendio reportado
+
+| Campo | Valor |
+|---|---|
+| Categoría | RUTA |
+| SI | `incendio_reportado == True` |
+| ENTONCES | Añadir `(entidad, cerrado, True)` |
+| Prioridad | 100 |
+| Fuente | Política académica del proyecto para el evento de incendio |
+| Tipo de fuente | SUPUESTO |
+| Justificación | Un reporte explícito impide considerar transitable el túnel afectado; no se modela propagación a vecinos. |
+| Prueba | `tests/test_conocimiento.py::test_eventos_reportados` |
+
+### R05 — Cierre por derrumbe reportado
+
+| Campo | Valor |
+|---|---|
+| Categoría | RUTA |
+| SI | `derrumbe_reportado == True` |
+| ENTONCES | Añadir `(entidad, cerrado, True)` |
+| Prioridad | 100 |
+| Fuente | D04: caída de rocas como evento reportado, sin análisis geomecánico |
+| Tipo de fuente | SUPUESTO |
+| Justificación | Traduce el bloqueo reportado en un hecho de cierre, sin intentar predecir derrumbes. |
+| Prueba | `tests/test_conocimiento.py::test_eventos_reportados` |

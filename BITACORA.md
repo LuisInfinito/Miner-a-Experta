@@ -30,6 +30,11 @@ Una entrada por sesión, la más reciente arriba. Tres líneas bastan.
 
 ## Sesiones
 
+### 2026-10-25 · Entregable mínimo: cargador y motor · duración no registrada
+- Hice: completé el núcleo técnico de S1-11 a S1-16, con carga estricta, comprobación global de D10, hechos y reglas por entidad, selección por prioridad, refracción y traza. Añadí cinco reglas documentadas (cadena de CO más incendio y derrumbe reportados), umbrales JSON y consola; el borrador de S1-17 queda cubierto con implementación y pruebas. Registré D22/D23 y la modalidad individual en el flujo. Pasaron 195 pruebas, la comprobación de dependencias y una instalación limpia del paquete con ejecución fuera del checkout.
+- Falló / dudas: no falló la suite del proyecto. La práctica aislada S1-06 produjo deliberadamente 1 prueba aprobada y 1 fallida, verificando el código 1; se eliminó el archivo temporal. La consola no calcula rutas ni demuestra uso operativo; los niveles de emergencia siguen siendo supuestos. No se actualizaron main, tarjetas ni tags semanales. Aprendizaje, horas reales y cierre semanal de S1-18 siguen sin acreditarse automáticamente.
+- Siguiente paso exacto: revisar este punto de control del sprint 1 y preparar el siguiente bloque del plan: ampliar el conocimiento, aplicar costos y cierres al planificador propio y completar escenarios. Mantener pendientes explícitos el resto de gases, ventilación, 15 reglas de Nivel 1, tres escenarios, rutas por minero y comparación con la línea base.
+
 ### 2026-10-25 · S1-10: modelo de la mina · duración no registrada
 - Hice: implementé `Nodo`, `Arista` y `Mina` en `src/mina_experta/`, con datos de solo lectura y vecinos bidireccionales. Añadí instalación del paquete, demostración en memoria, documentación y D21. La demostración funcionó, pasaron las 113 pruebas y no se detectaron dependencias incompatibles.
 - Falló / dudas: ninguna falla en los casos ejecutados. El modelo valida coherencia local; todavía no carga archivos ni exige conectividad global o recorridos de refugio a 500 m para toda mina construida en código.

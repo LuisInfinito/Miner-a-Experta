@@ -111,6 +111,9 @@ Todas las siglas y términos técnicos usados en el proyecto, explicados para qu
 | **Hecho** | Dato conocido en un momento. En el proyecto: tupla `(entidad, atributo, valor)`, p. ej. `(tunel_4_7, co_ppm, 30)`. |
 | **Hecho derivado** | Hecho que no venía de los sensores, sino que fue concluido por una regla. |
 | **Memoria de trabajo** | Conjunto de hechos conocidos en el momento actual. |
+| **Activación de una regla** | Regla junto con una entidad y los hechos concretos que satisfacen todas sus condiciones; puede dispararse si no fue ejecutada ya con esos antecedentes. |
+| **Escalar JSON** | Un valor simple: texto, número, booleano o `null`; no una lista ni un objeto. |
+| **Instantánea de hechos** | Datos correspondientes a una ejecución independiente; no mezcla automática de lecturas tomadas en momentos distintos. |
 | **Motor de inferencia** | Programa genérico que aplica las reglas a los hechos para obtener conclusiones. |
 | **Inferencia** | Obtener una conclusión nueva a partir de hechos y reglas. |
 | **Encadenamiento hacia adelante (forward chaining)** | Razonar desde los hechos hacia las conclusiones, disparando reglas hasta que no se pueda concluir nada nuevo. Es el que usamos. |

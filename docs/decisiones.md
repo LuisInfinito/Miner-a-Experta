@@ -116,3 +116,15 @@ Formato: fecha · decisión · alternativas consideradas · por qué.
 **Alternativas:** diccionarios modificables accesibles al llamador; reconstruir las conexiones recorriendo todos los túneles en cada consulta.
 **Por qué:** evita que cambios externos invaliden las conexiones ya construidas y permite consultar vecinos y longitudes sin mezclar la geometría con el futuro estado de emergencia.
 
+## D22 — Carga estricta y comprobación global de la mina
+**Fecha:** 2026-10-25
+**Decisión:** cargar UTF-8 con biblioteca estándar, rechazando claves JSON repetidas y constantes no estándar. Validar campos antes de construir el modelo; exigir conectividad, frente, salida, refugio y D10. Comprobar D10 mediante búsqueda propia por distancia desde todos los refugios, limitada a 500 m.
+**Alternativas:** depender de JSON Schema durante la ejecución; comprobar D10 solo por distancia recta.
+**Por qué:** evita archivos ambiguos y dependencias de ejecución adicionales; el límite se refiere al recorrido real. El esquema de desarrollo sigue siendo una comprobación independiente del formato.
+
+## D23 — Motor mínimo por entidad con traza y refracción
+**Fecha:** 2026-10-25
+**Decisión:** conservar hechos como tuplas escalares inmutables, reglas con condiciones y conclusiones declarativas y memoria nueva por ejecución. Un disparo reúne condiciones de la misma entidad; su identidad incluye regla, entidad y antecedentes. Ordenar por prioridad descendente y desempatar por identificador de regla y entidad. Solo añadir hechos; no ejecutar efectos externos. Registrar antecedentes, conclusiones y hechos nuevos; el límite de disparos genera error si queda trabajo pendiente.
+**Alternativas:** bloquear una regla para todas las entidades tras su primer disparo; permitir funciones arbitrarias como acciones; mezclar mediciones de distintas entidades.
+**Por qué:** hace reproducible y explicable la cadena mínima sin omitir el segundo túnel ni introducir efectos difíciles de comprobar. Uniones entre vecinos, retractación y explicación recursiva quedan fuera de esta primera implementación. Detalles y pseudocódigo en [el entregable mínimo](plan/entregable-minimo.md).
+
