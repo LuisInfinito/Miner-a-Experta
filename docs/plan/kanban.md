@@ -214,9 +214,11 @@ El núcleo queda prácticamente en la capacidad (≈ 18 h); B la excede en 1,5 h
 
 ### Orden sugerido
 
+El criterio no es el número del issue: primero las **dependencias** (lo que desbloquea a otros), después lo que hay que **aprender justo antes de usarlo** y al final lo **opcional** (`Si alcanza`). Las tareas de aprendizaje van en paralelo; las sesiones conjuntas se reservan para lo que requiere a los dos.
+
 ```
-Semana 1:  S1-00 → S1-03 → S1-03b → S1-01 → S1-04 → S1-02 → S1-05 → S1-07 → S1-08 (sesión conjunta)
-Semana 2:  A: S1-12 → S1-09 → S1-06      B: S1-10 → S1-11 → S1-06
+Semana 1:  S1-00 → S1-03 → S1-03b → S1-01 → S1-04 → S1-02 → S1-05 → S1-07 → S1-08 (sesión conjunta) → S1-09 (A)
+Semana 2:  A: S1-12 → S1-06      B: S1-10 → S1-11 → S1-06
            Juntos: S1-13 → S1-14 → S1-18
            Si alcanza: S1-15, S1-16, S1-17
 ```

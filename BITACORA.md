@@ -30,6 +30,11 @@ Una entrada por sesión, la más reciente arriba. Tres líneas bastan.
 
 ## Sesiones
 
+### 2026-10-24 · Tablero del sprint 1 · 2 h
+- Hice: cerramos S1-00, S1-03 y S1-03b; configuramos GitHub Projects (columnas, campos, etiquetas, workflows) y cargamos las 27 tarjetas del sprint 1 con dueño, estimación, prioridad e iteración.
+- Falló / dudas: S1-03 y S1-03b son de infraestructura y no pasan por PR (excepción consciente a la DoD). Horas estimadas, sin medir: ~2,5 h brutas y ~1,75 h productivas.
+- Siguiente paso exacto: S1-01, nivelación de Python con ejercicios del dominio.
+
 ### 2026-10-17 · Guía de carga del tablero
 - Hice: agregamos a kanban.md la guía paso a paso para cargar tarjetas (6.2.2) y los títulos del Backlog listos para copiar.
 - Falló / dudas: ninguna.
