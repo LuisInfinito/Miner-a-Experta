@@ -30,6 +30,11 @@ Una entrada por sesión, la más reciente arriba. Tres líneas bastan.
 
 ## Sesiones
 
+### 2026-10-25 · S1-02: clases y módulos · duración no registrada
+- Hice: confirmé la publicación previa de S1-04 (`b744ad0`) y preparé S1-02 en `luis/s1-02-clases-modulos`, basada en esa rama. Añadí una clase con `__init__`, una `dataclass` y una demostración que las importa desde otro módulo, con guía y pruebas.
+- Falló / dudas: la consulta de PR sigue bloqueada; se diagnosticó rechazo del proxy a `api.github.com` (conexión HTTPS, 403). No se abrió ni fusionó un PR ni se sustituyó la revisión del compañero. El aprendizaje individual sigue pendiente de revisión.
+- Siguiente paso exacto: verificar y publicar las comprobaciones de S1-02; resolver la apertura y revisión de los PR cuando haya acceso a la API o desde el navegador. Después continuar con S1-05 (leer y escribir JSON), sin dar por cerradas las tarjetas de aprendizaje.
+
 ### 2026-10-25 · Preparación de S1-04 · duración no registrada
 - Hice: añadí `requirements-dev.txt` y la guía multiplataforma de instalación, comprobación de rama y revisión por PR; preparé la rama `luis/s1-04-nivelacion`. La instalación, la comprobación de dependencias y las 14 pruebas pasaron.
 - Falló / dudas: la API de GitHub devolvió `Forbidden`; no se pudo consultar la tarjeta ni abrir el PR automáticamente. La publicación de la rama se comprueba por separado; no se considera completada S1-04 sin revisión del compañero.

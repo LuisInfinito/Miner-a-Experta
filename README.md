@@ -17,6 +17,7 @@ Este README es la portada. La documentación se lee como un informe, en orden:
 6. [Tablero Kanban](docs/plan/kanban.md)
 7. [S1-01: nivelación de Python](docs/plan/nivelacion-python.md)
 8. [S1-04: práctica de rama y revisión](docs/plan/practica-git.md)
+9. [S1-02: clases y módulos](docs/plan/clases-y-modulos.md)
 
 ### Parte II — Desarrollo (un capítulo por semana)
 - [Semana 1](docs/capitulos/semana-01.md)
@@ -57,6 +58,7 @@ La aplicación todavía no está implementada. Los ejercicios de nivelación de 
 ```bash
 .venv/bin/python -m pip install -r requirements-dev.txt
 .venv/bin/python ejercicios/nivelacion.py
+.venv/bin/python -m ejercicios.clases
 .venv/bin/python -m pytest -q
 ```
 
