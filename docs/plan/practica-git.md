@@ -35,10 +35,12 @@ git switch luis/s1-04-nivelacion
 python -m pip install -r requirements-dev.txt
 python -m pip check
 python ejercicios/nivelacion.py
-python -m pytest -q
+python -m pytest tests/test_nivelacion.py -q
 ```
 
 La demostración debe mostrar distancia 350, refugios `n3` y `n5`, y entidades `tunel_1_2` y `tunel_3_4`. La suite debe terminar con 14 pruebas aprobadas. Ejecuta todo desde la raíz del checkout. Cada equipo crea su propio `.venv`; no se copia ni se versiona.
+
+Ese comando comprueba solo S1-01. En ramas posteriores, `python -m pytest -q` ejecuta además los nuevos ejercicios y puede mostrar un total mayor.
 
 ## Abrir y revisar el PR
 
@@ -51,3 +53,5 @@ La demostración debe mostrar distancia 350, refugios `n3` y `n5`, y entidades `
 ## Estado de esta sesión
 
 La consulta de issues por la API devolvió `Forbidden`; no se pudo verificar su número ni abrir un PR automáticamente. Las pruebas locales sí pasaron. El resultado del envío de la rama queda registrado en la bitácora. La comprensión de S1-01 y la revisión por el compañero siguen siendo actividades del integrante.
+
+Se confirmó por Git que la rama `luis/s1-04-nivelacion` está publicada con el commit `b744ad0`. Al retomar S1-04, la consulta de PR también falló: el proxy rechazó la conexión HTTPS a `api.github.com` con `403 Forbidden`. Existe una variable de autenticación, pero no se pudo verificar el acceso a la API; no hace falta pedir otro token sin resolver antes ese bloqueo. Se puede abrir el PR desde GitHub en el navegador. No se ha fusionado la rama ni confirmado la automatización del tablero.
