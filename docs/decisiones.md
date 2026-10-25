@@ -99,3 +99,8 @@ Formato: fecha · decisión · alternativas consideradas · por qué.
 **Decisión:** los sprints se representan con un campo *Iteration* de 2 semanas, no con Milestones.
 **Por qué:** es el mecanismo nativo de GitHub Projects para sprints y permite filtrar el tablero por sprint.
 
+## D19 — Tareas de tablero sin PR
+**Fecha:** 2026-10-24
+**Decisión:** las tareas que no tocan archivos del repositorio (solo el tablero o la configuración de GitHub) se cierran directamente, sin PR, y la excepción se anota en la bitácora. Las tareas con cambios en el repositorio siguen pasando por PR revisado.
+**Por qué:** la DoD exige PR para todas las tareas, pero el tablero no vive en el repositorio; pedir un PR sin cambios reales sería trámite vacío.
+

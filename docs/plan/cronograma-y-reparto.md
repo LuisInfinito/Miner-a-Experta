@@ -19,8 +19,8 @@ Las semanas se agrupan en 4 sprints de 2 semanas (ver [Sprints](sprints.md)); la
 
 | Sem. | Integrante A | Integrante B | Sesión conjunta | Entregable |
 |---|---|---|---|---|
-| 1 | Nivelación Python; extraer umbrales de la normativa | Nivelación Python; clases del grafo | Esquema JSON, repositorio, acuerdo de trabajo | Mina de prueba en JSON + umbrales con fuente |
-| 2 | **Motor mínimo (en pareja)**; borrador de 5 reglas en el catálogo; pytest básico | **Motor mínimo (en pareja)**; cargador JSON + pruebas | Integrar motor y cargador | Motor que dispara 2–3 reglas con traza |
+| 1 | Nivelación Python; umbrales de la normativa; mina de prueba en JSON | Nivelación Python; apoyo en el esquema JSON | Esquema JSON, repositorio, acuerdo de trabajo | Mina de prueba en JSON + umbrales con fuente |
+| 2 | **Motor mínimo (en pareja)**; borrador de 5 reglas en el catálogo; pytest básico | **Motor mínimo (en pareja)**; clases del grafo; cargador JSON + pruebas | Integrar motor y cargador | Motor que dispara 2–3 reglas con traza |
 | 3 | 15 reglas + explicación "¿por qué?" | Dijkstra + línea base con filtro | Revisión cruzada | Reglas probadas; rutas calculadas |
 | 4 | Conectar motor → costos de aristas | Conectar planificador → salida en consola | **3 escenarios de punta a punta** | **Punto de control** |
 | 5 | Factores de certeza | A\* + varios mineros | Revisión cruzada | Certeza propagada; A\* operativo |

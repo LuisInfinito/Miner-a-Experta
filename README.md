@@ -25,6 +25,7 @@ Este README es la portada. La documentación se lee como un informe, en orden:
 - [Registro de decisiones](docs/decisiones.md)
 - [Glosario de siglas y términos](docs/glosario.md)
 - [Bitácora de sesiones](BITACORA.md)
+- [Contexto vivo del proyecto](docs/contexto.md) *(interno)*
 
 ## Cronología del código
 

@@ -82,7 +82,7 @@ Detalle de tareas: [tablero Kanban](kanban.md#7-sprint-1--tareas).
 
 Una tarea solo pasa a **Hecho** si:
 
-- [ ] Está en `main` mediante un PR revisado por el otro integrante.
+- [ ] Está en `main` mediante un PR revisado por el otro integrante. *(Excepción: las tareas que no tocan el repositorio —solo tablero o configuración de GitHub— se cierran directamente y se anotan en la bitácora; ver D19.)*
 - [ ] Las pruebas pasan.
 - [ ] Si es una regla: está en el [catálogo](../reglas.md) con fuente.
 - [ ] Los términos nuevos están en el [glosario](../glosario.md).
