@@ -20,6 +20,7 @@ Este README es la portada. La documentación se lee como un informe, en orden:
 9. [S1-02: clases y módulos](docs/plan/clases-y-modulos.md)
 10. [S1-05: lectura y escritura de JSON](docs/plan/lectura-json.md)
 11. [S1-07: ciclo del motor y refracción](docs/plan/ciclo-motor.md)
+12. [S1-08: esquema JSON de la mina](docs/plan/esquema-mina.md)
 
 ### Parte II — Desarrollo (un capítulo por semana)
 - [Semana 1](docs/capitulos/semana-01.md)

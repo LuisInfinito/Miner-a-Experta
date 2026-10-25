@@ -30,6 +30,11 @@ Una entrada por sesión, la más reciente arriba. Tres líneas bastan.
 
 ## Sesiones
 
+### 2026-10-25 · S1-08: esquema JSON de la mina · duración no registrada
+- Hice: definí el contrato de la mina estática en `data/esquemas/mina.schema.json`, documenté D20, los campos y las restricciones del futuro cargador, y añadí términos al glosario. El formato usa coordenadas en metros y túneles bidireccionales con longitud física. Pasaron las 61 pruebas y la comprobación de dependencias.
+- Falló / dudas: ninguna falla en la validación estructural. Todavía no hay cargador ni comprobación ejecutable de referencias, geometría, conectividad y recorridos de hasta 500 m; esos requisitos se registraron para S1-11. No se creó aún la mina de prueba.
+- Siguiente paso exacto: S1-09, crear `data/mina_prueba.json` con 6–8 nodos y documentar los recorridos desde cada frente a un refugio, conforme a D10 y D20.
+
 ### 2026-10-25 · S1-07: ciclo del motor · duración no registrada
 - Hice: preparé una guía de encadenamiento hacia adelante, prioridad, refracción y traza, con un recorrido manual de tres reglas abstractas y preguntas de comprensión. No se añadieron reglas de minería ni código del motor.
 - Falló / dudas: la comprensión individual queda por comprobar; una guía no la acredita automáticamente. El desempate de reglas y la identificación de disparos siguen pendientes de S1-12.

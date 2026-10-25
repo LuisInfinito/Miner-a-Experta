@@ -156,6 +156,9 @@ Todas las siglas y términos técnicos usados en el proyecto, explicados para qu
 |---|---|
 | **Python** | Lenguaje de programación del proyecto. |
 | **JSON** | Formato de texto para datos estructurados. Ahí se describe la mina y los escenarios. |
+| **JSON Schema** | Formato para describir los campos y tipos permitidos en un documento JSON. No comprueba por sí solo recorridos ni referencias entre nodos. |
+| **Cota** | Coordenada vertical en metros respecto de una referencia. En D20, superficie en 0 y subsuelo con valores negativos. |
+| **Túnel bidireccional** | Túnel que permite recorrer sus extremos en ambos sentidos; se registra una sola vez en la mina. |
 | **Clase** | Plantilla de Python para crear objetos con datos y comportamiento (p. ej. `Nodo`, `Regla`). |
 | **Diccionario** | Estructura de Python de pares clave–valor. |
 | **Tupla** | Secuencia inmutable de Python, p. ej. `(entidad, atributo, valor)`. |
