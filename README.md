@@ -22,6 +22,7 @@ Este README es la portada. La documentación se lee como un informe, en orden:
 11. [S1-07: ciclo del motor y refracción](docs/plan/ciclo-motor.md)
 12. [S1-08: esquema JSON de la mina](docs/plan/esquema-mina.md)
 13. [S1-09: mina académica de prueba](docs/plan/mina-prueba.md)
+14. [S1-10: modelo de la mina en Python](docs/plan/modelo-mina.md)
 
 ### Parte II — Desarrollo (un capítulo por semana)
 - [Semana 1](docs/capitulos/semana-01.md)
@@ -60,9 +61,10 @@ mina-experta/
 La aplicación todavía no está implementada. Los ejercicios de nivelación de S1-01 se ejecutan desde la raíz del repositorio con el entorno virtual preparado:
 
 ```bash
-.venv/bin/python -m pip install -r requirements-dev.txt
+.venv/bin/python -m pip install -e . -r requirements-dev.txt
 .venv/bin/python ejercicios/nivelacion.py
 .venv/bin/python -m ejercicios.clases
+.venv/bin/python -m ejercicios.mina_en_memoria
 .venv/bin/python -m pytest -q
 ```
 

@@ -110,3 +110,9 @@ Formato: fecha · decisión · alternativas consideradas · por qué.
 **Alternativas:** derivar siempre la longitud de las coordenadas; permitir túneles dirigidos desde el primer entregable; mezclar estado de emergencia y geometría en un archivo.
 **Por qué:** permite túneles cuyo recorrido supera la línea recta, conserva la futura heurística admisible y evita mezclar datos permanentes con inferencias. El esquema valida la estructura; S1-11 validará referencias, unicidad, geometría, conectividad y la restricción D10 de 500 m por recorrido. Detalles en [S1-08](plan/esquema-mina.md) y contrato en [mina.schema.json](../data/esquemas/mina.schema.json).
 
+## D21 — Modelo estático inmutable y vecinos bidireccionales
+**Fecha:** 2026-10-25
+**Decisión:** `Nodo` y `Arista` son clases de datos inmutables; `Mina` copia las colecciones de entrada y ofrece consultas de solo lectura por identificador. `vecinos(id)` devuelve pares `(Nodo, Arista)` en ambos sentidos, conservando el orden de entrada. El constructor valida la coherencia local; S1-11 verificará los requisitos globales de una mina completa.
+**Alternativas:** diccionarios modificables accesibles al llamador; reconstruir las conexiones recorriendo todos los túneles en cada consulta.
+**Por qué:** evita que cambios externos invaliden las conexiones ya construidas y permite consultar vecinos y longitudes sin mezclar la geometría con el futuro estado de emergencia.
+

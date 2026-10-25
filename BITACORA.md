@@ -30,6 +30,11 @@ Una entrada por sesión, la más reciente arriba. Tres líneas bastan.
 
 ## Sesiones
 
+### 2026-10-25 · S1-10: modelo de la mina · duración no registrada
+- Hice: implementé `Nodo`, `Arista` y `Mina` en `src/mina_experta/`, con datos de solo lectura y vecinos bidireccionales. Añadí instalación del paquete, demostración en memoria, documentación y D21. La demostración funcionó, pasaron las 113 pruebas y no se detectaron dependencias incompatibles.
+- Falló / dudas: ninguna falla en los casos ejecutados. El modelo valida coherencia local; todavía no carga archivos ni exige conectividad global o recorridos de refugio a 500 m para toda mina construida en código.
+- Siguiente paso exacto: S1-11, cargar `data/mina_prueba.json`, crear los objetos del modelo y validar los requisitos globales y errores de archivo. S1-12 sigue pendiente para el diseño del motor.
+
 ### 2026-10-25 · S1-09: mina de prueba · duración no registrada
 - Hice: creé `data/mina_prueba.json` con ocho nodos, ocho túneles, dos cotas subterráneas, una salida, un refugio y dos frentes. Documenté y comprobé recorridos de 150 m y 220 m hasta el refugio. Pasaron las 69 pruebas, incluidas las ocho del entregable: formato, referencias, geometría, conectividad y recorridos.
 - Falló / dudas: ninguna falla en los casos ejecutados. Las comprobaciones corresponden al archivo concreto; aún no hay cargador general ni planificador.
