@@ -19,10 +19,10 @@ def test_demostracion_completa():
     resultado = ejecutar("--co", "tunel_1_2=120", "--co", "tunel_2_3=20")
     assert resultado.returncode == 0, resultado.stderr
     assert "8 nodos, 8 túneles" in resultado.stdout
-    assert "Disparos: 3" in resultado.stdout
+    assert "Disparos: 5" in resultado.stdout
     assert "('tunel_1_2', 'cerrado', True)" in resultado.stdout
     assert "[tunel_2_3]" not in resultado.stdout
-    assert "aún no calcula rutas" in resultado.stdout
+    assert "Sin origen --desde" in resultado.stdout
 
 
 @pytest.mark.parametrize("lectura", ["no_existe=120", "tunel_1_2=NaN",
@@ -58,3 +58,35 @@ def test_evento_en_tunel_desconocido():
     resultado = ejecutar("--derrumbe", "tunel_ausente")
     assert resultado.returncode == 2
     assert "Túnel desconocido" in resultado.stderr
+
+
+def test_ruta_y_alternativa_desde_consola():
+    limpia = ejecutar("--desde", "n5")
+    assert limpia.returncode == 0, limpia.stderr
+    assert "n5 -> n4 -> n3 -> n2 -> n1; distancia 470 m; costo 470" in limpia.stdout
+    cerrada = ejecutar("--desde", "n5", "--co", "tunel_3_4=120")
+    assert cerrada.returncode == 0, cerrada.stderr
+    assert "n5 -> n4 -> n8 -> n6 -> n3 -> n2 -> n1; distancia 710 m; costo 710" in cerrada.stdout
+
+
+def test_sin_ruta_y_destino_refugio_explicito():
+    aislada = ejecutar("--desde", "n5", "--derrumbe", "tunel_4_5")
+    assert aislada.returncode == 0, aislada.stderr
+    assert "Ruta desde n5: SIN RUTA" in aislada.stdout
+    refugio = ejecutar("--desde", "n5", "--hasta", "n4")
+    assert refugio.returncode == 0, refugio.stderr
+    assert "n5 -> n4; distancia 150 m; costo 150" in refugio.stdout
+
+
+def test_varios_origenes():
+    salida = ejecutar("--desde", "n5", "--desde", "n7")
+    assert salida.returncode == 0, salida.stderr
+    assert "Ruta desde n5:" in salida.stdout and "Ruta desde n7:" in salida.stdout
+
+
+@pytest.mark.parametrize("argumentos", [("--desde", "inexistente"),
+    ("--desde", "n5", "--hasta", "inexistente"), ("--hasta", "n1")])
+def test_destinos_invalidos(argumentos):
+    salida = ejecutar(*argumentos)
+    assert salida.returncode == 2
+    assert "Error:" in salida.stderr

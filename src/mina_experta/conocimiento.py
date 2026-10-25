@@ -1,4 +1,4 @@
-"""Conocimiento mínimo R01–R05; separado del motor genérico."""
+"""Conocimiento mínimo R01–R07; separado del motor genérico."""
 
 import json
 from pathlib import Path
@@ -15,6 +15,27 @@ def reglas_eventos() -> tuple[Regla, ...]:
               (("cerrado", True),), 100),
         Regla("R05", (Condicion("derrumbe_reportado", "eq", True),),
               (("cerrado", True),), 100),
+    )
+
+
+def reglas_costos(ruta: str | Path) -> tuple[Regla, ...]:
+    with Path(ruta).open(encoding="utf-8") as archivo:
+        datos = json.load(archivo, object_pairs_hook=_objeto_sin_repeticiones,
+                          parse_constant=_rechazar_constante)
+    claves = ("multiplicador_alerta_co", "multiplicador_riesgo_alto_co")
+    if not isinstance(datos, dict) or set(datos) != set(claves):
+        raise ValueError("Configuración de costos incorrecta")
+    for clave in claves:
+        _validar_numero(datos[clave], clave)
+        if datos[clave] < 1:
+            raise ValueError("Los factores de costo deben ser al menos 1")
+    if datos[claves[1]] < datos[claves[0]]:
+        raise ValueError("El riesgo alto no debe costar menos que la alerta")
+    return (
+        Regla("R06", (Condicion("alerta_co", "eq", True),),
+              (("multiplicador", datos[claves[0]]),), 5),
+        Regla("R07", (Condicion("riesgo_alto_co", "eq", True),),
+              (("multiplicador", datos[claves[1]]),), 5),
     )
 
 

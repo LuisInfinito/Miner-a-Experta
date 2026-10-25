@@ -145,6 +145,8 @@ Todas las siglas y términos técnicos usados en el proyecto, explicados para qu
 | **Multiplicador de costo** | Factor (≥ 1) por el que una regla multiplica el costo de una arista. |
 | **Ruta** | Secuencia de aristas desde un origen hasta un destino. |
 | **Dijkstra** | Algoritmo que encuentra la ruta de menor costo en un grafo. |
+| **Cola de prioridad (`heapq`)** | Estructura que permite extraer primero el elemento de menor prioridad numérica; el planificador la usa para explorar el menor costo acumulado. |
+| **Metros ponderados por riesgo** | Unidad de costo del modelo: longitud física multiplicada por factores académicos. No equivale a tiempo ni probabilidad. |
 | **A\* (A estrella)** | Variante de Dijkstra que usa una heurística para explorar menos nodos. |
 | **Heurística** | Estimación del costo que falta para llegar al destino. |
 | **Admisible** | Heurística que nunca sobreestima el costo real. Garantiza que A\* encuentre la ruta óptima. |

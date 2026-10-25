@@ -30,6 +30,11 @@ Una entrada por sesión, la más reciente arriba. Tres líneas bastan.
 
 ## Sesiones
 
+### 2026-10-25 · Integración de costos y rutas · duración no registrada
+- Hice: conecté los hechos del motor con un mapa de costos de solo lectura y Dijkstra propio. Añadí R06/R07 con factores JSON, D24 y opciones de consola para orígenes y destinos. En la mina real, cerrar tunel_3_4 cambia la ruta desde n5 de 470 m a una alternativa de 710 m; aislar n5 devuelve SIN RUTA. Pasaron las 225 pruebas.
+- Falló / dudas: ninguna falla en los casos ejecutados. Las siete reglas actuales no completan Nivel 1; aún faltan la línea base con filtro por umbral, los escenarios JSON, otros gases, ventilación y la mina ampliada. No se afirma seguridad por ausencia de mediciones ni se elige automáticamente refugio frente a salida.
+- Siguiente paso exacto: implementar la línea base con filtro por umbral y los escenarios JSON reproducibles, manteniendo la revisión del alcance completo del sprint 2. Horas y aprendizaje no medidos; no se crean cierres semanales ni tags automáticamente.
+
 ### 2026-10-25 · Entregable mínimo: cargador y motor · duración no registrada
 - Hice: completé el núcleo técnico de S1-11 a S1-16, con carga estricta, comprobación global de D10, hechos y reglas por entidad, selección por prioridad, refracción y traza. Añadí cinco reglas documentadas (cadena de CO más incendio y derrumbe reportados), umbrales JSON y consola; el borrador de S1-17 queda cubierto con implementación y pruebas. Registré D22/D23 y la modalidad individual en el flujo. Pasaron 195 pruebas, la comprobación de dependencias y una instalación limpia del paquete con ejecución fuera del checkout.
 - Falló / dudas: no falló la suite del proyecto. La práctica aislada S1-06 produjo deliberadamente 1 prueba aprobada y 1 fallida, verificando el código 1; se eliminó el archivo temporal. La consola no calcula rutas ni demuestra uso operativo; los niveles de emergencia siguen siendo supuestos. No se actualizaron main, tarjetas ni tags semanales. Aprendizaje, horas reales y cierre semanal de S1-18 siguen sin acreditarse automáticamente.

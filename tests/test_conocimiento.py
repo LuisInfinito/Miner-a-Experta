@@ -5,7 +5,7 @@ from pathlib import Path
 
 import pytest
 
-from mina_experta.conocimiento import reglas_co, reglas_eventos
+from mina_experta.conocimiento import reglas_co, reglas_eventos, reglas_costos
 from mina_experta.motor import Motor
 
 
@@ -56,3 +56,19 @@ def test_varias_causas_de_cierre_conservan_justificacion():
     assert [p.regla_id for p in resultado.traza] == ["R04", "R05", "R01", "R02", "R03"]
     assert len(resultado.por_que(("t1", "cerrado", True))) == 3
     assert resultado.hechos.count(("t1", "cerrado", True)) == 1
+
+
+@pytest.mark.parametrize("co, factores", [(20, []), (30, [2]), (80, [2, 3])])
+def test_reglas_costos_co(co, factores):
+    reglas = (*reglas_co(RUTA), *reglas_costos(RUTA.with_name("costos.json")))
+    salida = Motor(reglas).ejecutar([("t1", "co_ppm", co)])
+    assert [h[2] for h in salida.hechos if h[1] == "multiplicador"] == factores
+
+
+@pytest.mark.parametrize("alerta, alto", [(0.5, 3), (3, 2), (True, 3), (2, float("inf"))])
+def test_configuracion_costos_invalida(tmp_path, alerta, alto):
+    ruta = tmp_path / "costos.json"
+    ruta.write_text(json.dumps({"multiplicador_alerta_co": alerta,
+                               "multiplicador_riesgo_alto_co": alto}), encoding="utf-8")
+    with pytest.raises(ValueError):
+        reglas_costos(ruta)

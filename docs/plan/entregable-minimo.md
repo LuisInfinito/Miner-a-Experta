@@ -4,6 +4,8 @@
 
 Este entregable reúne el cargador S1-11, el diseño S1-12 y el motor de S1-13/S1-14, con comprobaciones de S1-15/S1-16. Se avanzó por dependencias bajo autorización del usuario. El aprendizaje individual, el registro de horas y la revisión de cierre de S1-18 no se dan por completados automáticamente.
 
+**Evolución posterior:** la [integración de rutas del sprint 2](rutas-costos.md) añade R06/R07 y `--desde`. Los resultados de 195 pruebas que se describen aquí son el registro del entregable anterior; la consola actual tiene más reglas y pruebas.
+
 ## Ejecutar de principio a fin
 
 Desde la raíz del repositorio, con Python 3.12 y el entorno virtual activado:
@@ -14,7 +16,7 @@ python -m mina_experta --co tunel_1_2=120 --co tunel_2_3=20
 python -m pytest -q
 ```
 
-La consola carga la mina real (8 nodos y 8 túneles), muestra R01 → R02 → R03 para `tunel_1_2` y termina con `Disparos: 3`. `tunel_2_3` no activa reglas con 20 ppm. El cierre es un hecho derivado, no una modificación del objeto `Arista`. No se calculan rutas todavía.
+La consola carga la mina real (8 nodos y 8 túneles) y encadena R01 → R02 → R03 para `tunel_1_2`. En el entregable original fueron tres disparos; la versión actual añade R06/R07 y muestra cinco. `tunel_2_3` no activa reglas con 20 ppm. El cierre es un hecho derivado, no una modificación del objeto `Arista`. Sin `--desde` no se solicitan rutas.
 
 Validación de esta sesión: **195 pruebas aprobadas**, comprobación de dependencias sin incompatibilidades y ejecución real de la consola. También se construyó una distribución del paquete, se instaló en un entorno virtual limpio sin dependencias externas de ejecución y se probó fuera del checkout pasando rutas absolutas de la mina y los umbrales. La práctica de pytest con fallo deliberado que se describe abajo fue independiente de esas 195 pruebas.
 

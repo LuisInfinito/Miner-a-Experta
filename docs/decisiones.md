@@ -128,3 +128,9 @@ Formato: fecha · decisión · alternativas consideradas · por qué.
 **Alternativas:** bloquear una regla para todas las entidades tras su primer disparo; permitir funciones arbitrarias como acciones; mezclar mediciones de distintas entidades.
 **Por qué:** hace reproducible y explicable la cadena mínima sin omitir el segundo túnel ni introducir efectos difíciles de comprobar. Uniones entre vecinos, retractación y explicación recursiva quedan fuera de esta primera implementación. Detalles y pseudocódigo en [el entregable mínimo](plan/entregable-minimo.md).
 
+## D24 — Costos por máximo factor y cierres dominantes
+**Fecha:** 2026-10-25
+**Decisión:** construir un mapa de costos independiente de la mina y nuevo por ejecución. El costo es longitud física por el mayor multiplicador inferido (todos ≥ 1). El cierre domina a los factores y excluye el túnel en ambos sentidos. R06/R07 usan factores externos configurables para alerta y riesgo alto de CO. Dijkstra propio devuelve nodos, aristas, distancia y costo; por defecto busca la salida de menor costo y devuelve ausencia de ruta si ninguna es alcanzable.
+**Alternativas:** multiplicar todos los escalones acumulativos de riesgo; modificar permanentemente las longitudes; elegir siempre la salida más próxima en línea recta.
+**Por qué:** evita contar repetidamente el mismo fenómeno y conservar efectos de una ejecución anterior. Mantiene D01 y separa el costo ponderado de la distancia física. Elegir automáticamente entre salida y refugio sigue pendiente de las decisiones de Nivel 2.
+

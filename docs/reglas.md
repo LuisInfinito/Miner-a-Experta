@@ -154,3 +154,29 @@ Cadena mínima de CO para el entregable del sprint 1. Las tres reglas se instanc
 | Tipo de fuente | SUPUESTO |
 | Justificación | Traduce el bloqueo reportado en un hecho de cierre, sin intentar predecir derrumbes. |
 | Prueba | `tests/test_conocimiento.py::test_eventos_reportados` |
+
+### R06 — Penalización por alerta de CO
+
+| Campo | Valor |
+|---|---|
+| Categoría | RUTA |
+| SI | `alerta_co == True` |
+| ENTONCES | Añadir `(entidad, multiplicador, multiplicador_alerta_co)` desde costos.json (inicialmente 2) |
+| Prioridad | 5 |
+| Fuente | D01 y D24: política académica de costos |
+| Tipo de fuente | SUPUESTO |
+| Justificación | Penaliza el recorrido en alerta sin cerrarlo; se combina por máximo con los demás factores. |
+| Prueba | `tests/test_conocimiento.py::test_reglas_costos_co` |
+
+### R07 — Penalización por riesgo alto de CO
+
+| Campo | Valor |
+|---|---|
+| Categoría | RUTA |
+| SI | `riesgo_alto_co == True` |
+| ENTONCES | Añadir `(entidad, multiplicador, multiplicador_riesgo_alto_co)` desde costos.json (inicialmente 3) |
+| Prioridad | 5 |
+| Fuente | D01 y D24: política académica de costos |
+| Tipo de fuente | SUPUESTO |
+| Justificación | Aumenta la penalización respecto a la alerta. Si R03 cierra el túnel, el cierre domina. |
+| Prueba | `tests/test_conocimiento.py::test_reglas_costos_co` |
