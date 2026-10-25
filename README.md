@@ -19,6 +19,7 @@ Este README es la portada. La documentación se lee como un informe, en orden:
 8. [S1-04: práctica de rama y revisión](docs/plan/practica-git.md)
 9. [S1-02: clases y módulos](docs/plan/clases-y-modulos.md)
 10. [S1-05: lectura y escritura de JSON](docs/plan/lectura-json.md)
+11. [S1-07: ciclo del motor y refracción](docs/plan/ciclo-motor.md)
 
 ### Parte II — Desarrollo (un capítulo por semana)
 - [Semana 1](docs/capitulos/semana-01.md)

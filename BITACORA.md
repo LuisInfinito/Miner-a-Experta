@@ -30,6 +30,11 @@ Una entrada por sesión, la más reciente arriba. Tres líneas bastan.
 
 ## Sesiones
 
+### 2026-10-25 · S1-07: ciclo del motor · duración no registrada
+- Hice: preparé una guía de encadenamiento hacia adelante, prioridad, refracción y traza, con un recorrido manual de tres reglas abstractas y preguntas de comprensión. No se añadieron reglas de minería ni código del motor.
+- Falló / dudas: la comprensión individual queda por comprobar; una guía no la acredita automáticamente. El desempate de reglas y la identificación de disparos siguen pendientes de S1-12.
+- Siguiente paso exacto: revisar el recorrido y continuar con S1-08, diseño del esquema JSON de la mina, antes de crear los datos de S1-09.
+
 ### 2026-10-25 · S1-05: lectura y escritura de JSON · duración no registrada
 - Hice: registré la modalidad individual aprobada por el usuario en el contexto. Añadí un ejemplo de escritura y lectura JSON con archivos temporales, guía y pruebas de errores y protección contra sobrescritura.
 - Falló / dudas: la revisión de compañero deja de ser requisito por decisión del usuario. La API de GitHub sigue sin acceso confirmado; publicar ramas por Git funciona. No se ha integrado a main ni se han cerrado tarjetas automáticamente.
