@@ -30,6 +30,11 @@ Una entrada por sesión, la más reciente arriba. Tres líneas bastan.
 
 ## Sesiones
 
+### 2026-10-25 · S1-09: mina de prueba · duración no registrada
+- Hice: creé `data/mina_prueba.json` con ocho nodos, ocho túneles, dos cotas subterráneas, una salida, un refugio y dos frentes. Documenté y comprobé recorridos de 150 m y 220 m hasta el refugio. Pasaron las 69 pruebas, incluidas las ocho del entregable: formato, referencias, geometría, conectividad y recorridos.
+- Falló / dudas: ninguna falla en los casos ejecutados. Las comprobaciones corresponden al archivo concreto; aún no hay cargador general ni planificador.
+- Siguiente paso exacto: S1-10, clases `Nodo`, `Arista` y `Mina` con consulta de vecinos, para después cargar este JSON en S1-11. La línea de diseño del motor (S1-12) se conserva como pendiente del sprint.
+
 ### 2026-10-25 · S1-08: esquema JSON de la mina · duración no registrada
 - Hice: definí el contrato de la mina estática en `data/esquemas/mina.schema.json`, documenté D20, los campos y las restricciones del futuro cargador, y añadí términos al glosario. El formato usa coordenadas en metros y túneles bidireccionales con longitud física. Pasaron las 61 pruebas y la comprobación de dependencias.
 - Falló / dudas: ninguna falla en la validación estructural. Todavía no hay cargador ni comprobación ejecutable de referencias, geometría, conectividad y recorridos de hasta 500 m; esos requisitos se registraron para S1-11. No se creó aún la mina de prueba.
