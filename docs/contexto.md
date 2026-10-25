@@ -1,6 +1,7 @@
 # Contexto vivo del proyecto
 
 ## Estado actual
+- El fork se desarrolla individualmente con ayuda del asistente hasta nuevo aviso. No se requiere revisión de otro integrante; antes de integrar cambios se revisa el código y se ejecutan las pruebas correspondientes. Se mantienen el orden y las dependencias del plan.
 - Sprint: 1 (semanas 1–2) · Objetivo: motor mínimo + cargador JSON
 - S1-00, S1-03 y S1-03b cerradas: repositorio en GitHub y tablero con 27 tarjetas.
 - Existe en src/: (nada aún)
