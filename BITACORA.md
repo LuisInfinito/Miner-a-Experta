@@ -30,6 +30,11 @@ Una entrada por sesión, la más reciente arriba. Tres líneas bastan.
 
 ## Sesiones
 
+### 2026-10-26 · Escenarios JSON y línea base · duración no registrada
+- Hice: implementé escenarios portables con mineros identificados y hechos originales, tres casos (CO moderado, incendio con desvío y derrumbe con aislamiento), y Dijkstra con filtro directo por CO/eventos independiente del motor. Añadí comparación manual y automática en escenarios, D25 y documentación de políticas y límites. Pasaron 262 pruebas, incluidas ejecuciones de los tres casos desde fuera del checkout.
+- Falló / dudas: ninguna falla en los casos ejecutados. La diferencia en CO moderado refleja políticas distintas, no una superioridad demostrada por encadenamiento. Siguen siete reglas y ocho nodos; aún faltan cobertura de gases/ventilación, al menos 15 reglas, mina ampliada y el caso de riesgos vecinos. Las métricas de exposición y tiempo no se han implementado ni se infieren de los costos.
+- Siguiente paso exacto: ampliar la cobertura del conocimiento y sus pruebas sin cambiar la independencia de la línea base; después preparar una mina mayor y un escenario donde la cadena de reglas detecte un riesgo que el filtro local no capture.
+
 ### 2026-10-25 · Integración de costos y rutas · duración no registrada
 - Hice: conecté los hechos del motor con un mapa de costos de solo lectura y Dijkstra propio. Añadí R06/R07 con factores JSON, D24 y opciones de consola para orígenes y destinos. En la mina real, cerrar tunel_3_4 cambia la ruta desde n5 de 470 m a una alternativa de 710 m; aislar n5 devuelve SIN RUTA. Pasaron las 225 pruebas.
 - Falló / dudas: ninguna falla en los casos ejecutados. Las siete reglas actuales no completan Nivel 1; aún faltan la línea base con filtro por umbral, los escenarios JSON, otros gases, ventilación y la mina ampliada. No se afirma seguridad por ausencia de mediciones ni se elige automáticamente refugio frente a salida.

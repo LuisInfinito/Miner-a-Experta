@@ -4,6 +4,8 @@
 
 Primera integración de las historias S2-H04 y S2-H05: hechos → costos/cierres → ruta. Se apoya en el cargador y motor comprobados del sprint 1. No declara completado el sprint 2: siguen pendientes ampliar las reglas, los escenarios JSON y la línea base con filtro por umbral.
 
+**Avance posterior:** ya se añadieron los [tres escenarios y la línea base](escenarios-comparacion.md). Los resultados de 225 pruebas registrados aquí corresponden a la sesión de integración de rutas.
+
 ## Prueba por consola
 
 Con el entorno virtual activado, desde la raíz del repositorio:

@@ -39,7 +39,7 @@ def reglas_costos(ruta: str | Path) -> tuple[Regla, ...]:
     )
 
 
-def reglas_co(ruta: str | Path) -> tuple[Regla, ...]:
+def cargar_umbrales_co(ruta: str | Path) -> dict:
     with Path(ruta).open(encoding="utf-8") as archivo:
         datos = json.load(archivo, object_pairs_hook=_objeto_sin_repeticiones,
                           parse_constant=_rechazar_constante)
@@ -53,6 +53,11 @@ def reglas_co(ruta: str | Path) -> tuple[Regla, ...]:
         _validar_numero(limites[nombre], nombre)
     if not 0 < limites["alerta"] < limites["riesgo_alto"] < limites["peligro_inmediato"]:
         raise ValueError("Los niveles de CO deben ser positivos y crecientes")
+    return limites
+
+
+def reglas_co(ruta: str | Path) -> tuple[Regla, ...]:
+    limites = cargar_umbrales_co(ruta)
     return (
         Regla("R01", (Condicion("co_ppm", "gt", limites["alerta"]),),
               (("alerta_co", True),), 30),

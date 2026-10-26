@@ -90,3 +90,10 @@ def test_destinos_invalidos(argumentos):
     salida = ejecutar(*argumentos)
     assert salida.returncode == 2
     assert "Error:" in salida.stderr
+
+
+def test_comparacion_manual():
+    salida = ejecutar("--desde", "n5", "--co", "tunel_2_3=30", "--comparar")
+    assert salida.returncode == 0, salida.stderr
+    assert "costo 570" in salida.stdout
+    assert "Línea base desde n5: SIN RUTA" in salida.stdout

@@ -134,3 +134,9 @@ Formato: fecha · decisión · alternativas consideradas · por qué.
 **Alternativas:** multiplicar todos los escalones acumulativos de riesgo; modificar permanentemente las longitudes; elegir siempre la salida más próxima en línea recta.
 **Por qué:** evita contar repetidamente el mismo fenómeno y conservar efectos de una ejecución anterior. Mantiene D01 y separa el costo ponderado de la distancia física. Elegir automáticamente entre salida y refugio sigue pendiente de las decisiones de Nivel 2.
 
+## D25 — Escenarios portables y comparación sobre datos originales
+**Fecha:** 2026-10-26
+**Decisión:** escenario JSON versión 1 con nombre, rutas de mina/umbrales/costos, mineros identificados, destinos y hechos originales. Resolver rutas respecto al archivo, rechazar lecturas repetidas, atributos derivados y mezclas con entradas manuales. Comparar con Dijkstra filtrado directamente por CO sobre el límite ocupacional configurado (inicialmente 25 ppm), incendio y derrumbe reportados. Ambos enfoques comparten mina, ubicaciones, hechos y destinos; la línea base no invoca el motor.
+**Alternativas:** depender del directorio de ejecución; mezclar silenciosamente archivos y opciones; comparar contra Dijkstra sin filtro; usar las conclusiones del motor en la línea base.
+**Por qué:** hace reproducible el experimento y conserva la independencia del comparador. El cierre directo por límite ocupacional es una política académica explícita, no una orden normativa de emergencia. Diferencias por políticas no acreditan por sí solas superioridad del sistema; falta demostrar el aporte del encadenamiento sobre riesgos vecinos.
+
