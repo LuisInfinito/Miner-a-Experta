@@ -4,7 +4,7 @@ Proyecto académico (curso Sistemas Expertos, 2 integrantes: A y B). Todo en esp
 
 ## Estado actual
 
-- **Nivel 1 implementado y en preparación de entrega**: paquete `src/mina_experta/`, instalación en `pyproject.toml`, herramientas en `requirements-dev.txt`, pruebas en `tests/` y CI en `.github/workflows/pruebas.yml`.
+- **Nivel 1 implementado y validado localmente, pendiente de aceptación**: paquete `src/mina_experta/`, instalación en `pyproject.toml`, herramientas en `requirements-dev.txt`, pruebas en `tests/` y CI en `.github/workflows/pruebas.yml`.
 - Mina principal: `data/mina_nivel1.json`, con 16 nodos y 20 túneles. Hay tres escenarios Nivel 1 y cuatro ejemplos de práctica. El catálogo define 25 tipos de regla; R24 se instancia por relación dirigida.
 - Comandos desde la raíz con el entorno virtual activado: `python -m pip install -e . -r requirements-dev.txt`, `python -m pytest -q` y `python -m mina_experta --escenario data/escenarios/nivel1_riesgo_vecino.json --explicar tunel_10_12`.
 - El plan sigue siendo la fuente de alcance; Nivel 2 está pendiente. Consulta `docs/plan/nivel1-verificacion.md` y `docs/entregas/nivel-1.md` para validación y entrega.

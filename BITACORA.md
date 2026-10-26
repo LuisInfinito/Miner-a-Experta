@@ -30,6 +30,11 @@ Una entrada por sesión, la más reciente arriba. Tres líneas bastan.
 
 ## Sesiones
 
+### 2026-10-26 · Pulido y preparación de entrega Nivel 1 · duración no registrada
+- Hice: sincronizé la rama acumulativa luis/nivel-1-entrega con main del fork (PR #1–#5 ya integrados), corregí rutas vacías que activaban predeterminados silenciosamente, actualicé las instrucciones desfasadas de AGENTS/contexto y preparé inicio rápido multiplataforma y guía con texto de PR. Añadí CI para Python 3.12 en Linux y Windows. En una copia limpia del commit y entorno nuevo pasaron 334 pruebas; se ejecutaron los siete escenarios desde fuera del checkout. Una distribución instalada sin dependencias externas de ejecución también ejecutó los tres escenarios Nivel 1.
+- Falló / dudas: ninguna falla local. La API de GitHub sigue devolviendo Forbidden; no se puede confirmar la ejecución de CI ni abrir PR mediante esa API. Windows queda configurado en CI, no validado localmente. Los supuestos académicos y el alcance pendiente de Nivel 2 están expresos en la guía.
+- Siguiente paso exacto: aceptar el PR de luis/nivel-1-entrega hacia main del fork tras revisar diff y CI; después el usuario abrirá el PR del fork/main al repositorio grupal con el texto de docs/entregas/nivel-1.md. No fusionar ni enviar al grupo automáticamente.
+
 ### 2026-10-26 · Punto de control técnico de Nivel 1 · duración no registrada
 - Hice: añadí mina_nivel1.json con 16 nodos, 20 túneles, dos cotas subterráneas, dos salidas y tres refugios. Los cuatro frentes tienen refugio a 150, 220, 60 y 100 m. Implementé relaciones dirigidas de humo, condiciones con entidades explícitas, R24/R25 y explicación por consola. Tres escenarios nuevos corren de punta a punta. En el control de riesgo vecino, la base cruza el vecino en una ruta de 420 m; el motor lo evita en una de 500 m, y desactivar solo vecindad recupera la ruta de la base. Pasaron 322 pruebas.
 - Falló / dudas: ninguna falla en los casos ejecutados. La relación de humo es un supuesto de un salto, no simulación física ni prueba de seguridad real. La mina de práctica se conserva. No se han integrado ramas a main ni creado tags; la revisión académica, horas y cierre semanal no se acreditan automáticamente.

@@ -48,7 +48,7 @@ La inferencia vecina tiene un control: al retirar solo R24/R25, el sistema recup
 
 La comprobación local se hace en Linux con Python 3.12. La CI de `.github/workflows/pruebas.yml` ejecutará instalación, suite y tres escenarios en Linux y Windows con Python 3.12. Configurar esa CI no acredita que ya haya terminado una ejecución remota; revisa sus resultados en GitHub antes de integrar.
 
-La revisión incluye una copia limpia de los archivos versionados, entorno virtual nuevo e instalación del proyecto, además de la distribución Python instalada sin dependencias externas de ejecución. Los datos se proporcionan desde el checkout. Los resultados finales se registran en BITACORA.md.
+La revisión se ejecutó en una copia limpia de los archivos versionados, con entorno virtual nuevo e instalación del proyecto: 334 pruebas aprobadas y los siete escenarios ejecutados desde fuera del checkout. También se construyó e instaló la distribución Python sin dependencias externas de ejecución y se ejecutaron allí los tres escenarios de Nivel 1, con sus datos proporcionados desde el checkout. Los resultados se registran en BITACORA.md. La ejecución de CI remota, incluido Windows, no está confirmada desde este entorno.
 
 No se incluyen factores de certeza, A*, decisiones automáticas de refugio/brigada ni explicación recursiva de Nivel 2. Los umbrales de emergencia y la exposición vecina son supuestos académicos. No se validó el modelo en una mina real ni se volvió a verificar la normativa durante esta preparación de entrega. Los capítulos y registros históricos conservan sus resultados de sesiones anteriores; el estado actual está en esta guía y en el contexto actualizado.
 
