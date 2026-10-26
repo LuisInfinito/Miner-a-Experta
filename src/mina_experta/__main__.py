@@ -1,8 +1,7 @@
 """Consola de mina, inferencia y rutas por costo dinámico."""
 
 import argparse
-import math
-
+from .ambiente import cargar_ambiente, reglas_ambiente
 from .cargador import cargar_mina
 from .conocimiento import cargar_umbrales_co, reglas_co, reglas_eventos, reglas_costos
 from .escenarios import cargar_escenario, validar_lecturas
@@ -16,6 +15,7 @@ def main():
     parser.add_argument("--mina")
     parser.add_argument("--umbrales")
     parser.add_argument("--costos")
+    parser.add_argument("--ambiente")
     parser.add_argument("--escenario", metavar="ARCHIVO")
     parser.add_argument("--comparar", action="store_true",
                         help="Mostrar también Dijkstra con filtro directo por umbral")
@@ -27,30 +27,34 @@ def main():
                         help="Lectura simulada; repetir para túneles distintos")
     parser.add_argument("--incendio", action="append", default=[], metavar="TUNEL")
     parser.add_argument("--derrumbe", action="append", default=[], metavar="TUNEL")
+    for opcion in ("no2", "co2", "h2s", "o2", "aire"):
+        parser.add_argument(f"--{opcion}", action="append", default=[], metavar="TUNEL=VALOR")
+    parser.add_argument("--anfo", action="append", default=[], metavar="TUNEL")
+    parser.add_argument("--sin-anfo", action="append", default=[], metavar="TUNEL")
     args = parser.parse_args()
     try:
         escenario = None
         if args.escenario:
             if (args.desde or args.hasta or args.co or args.incendio or args.derrumbe
-                    or any(v is not None for v in (args.mina, args.umbrales, args.costos))):
+                    or args.no2 or args.co2 or args.h2s or args.o2 or args.aire or args.anfo or args.sin_anfo
+                    or any(v is not None for v in (args.mina, args.umbrales, args.costos, args.ambiente))):
                 raise ValueError("--escenario no se mezcla con entradas manuales")
             escenario = cargar_escenario(args.escenario)
         mina = escenario.mina if escenario else cargar_mina(args.mina or "data/mina_prueba.json")
         umbrales = escenario.umbrales if escenario else args.umbrales or "data/configuracion/umbrales.json"
         config_costos = escenario.costos if escenario else args.costos or "data/configuracion/costos.json"
+        config_ambiente = (escenario.ambiente if escenario
+                           else args.ambiente or "data/configuracion/ambiente.json")
+        ambiente = cargar_ambiente(config_ambiente) if config_ambiente else None
         hechos = []
-        entidades = set()
-        for lectura in args.co:
-            entidad, texto = lectura.split("=", 1)
-            valor = float(texto)
-            if entidad not in mina.aristas:
-                raise ValueError(f"Túnel desconocido: {entidad}")
-            if entidad in entidades:
-                raise ValueError(f"Lectura repetida para {entidad}; use una por ejecución")
-            if not math.isfinite(valor) or valor < 0:
-                raise ValueError("El CO debe ser un número finito no negativo")
-            entidades.add(entidad)
-            hechos.append((entidad, "co_ppm", valor))
+        for atributo, lecturas in (("co_ppm", args.co), ("no2_ppm", args.no2),
+            ("co2_ppm", args.co2), ("h2s_ppm", args.h2s),
+            ("o2_porcentaje", args.o2), ("aire_m_min", args.aire)):
+            for lectura in lecturas:
+                entidad, texto = lectura.split("=", 1)
+                hechos.append((entidad, atributo, float(texto)))
+        for valor, entidades in ((True, args.anfo), (False, args.sin_anfo)):
+            hechos.extend((entidad, "uso_anfo", valor) for entidad in entidades)
         for atributo, reportados in (("incendio_reportado", args.incendio),
                                      ("derrumbe_reportado", args.derrumbe)):
             for entidad in reportados:
@@ -58,8 +62,12 @@ def main():
                     raise ValueError(f"Túnel desconocido: {entidad}")
                 hechos.append((entidad, atributo, True))
         hechos = escenario.hechos if escenario else validar_lecturas(mina, hechos)
+        if ambiente is None and any(a not in ("co_ppm", "incendio_reportado", "derrumbe_reportado")
+                                    for _, a, _ in hechos):
+            raise ValueError("El escenario requiere un archivo ambiente para estas lecturas")
         resultado = Motor((*reglas_co(umbrales), *reglas_eventos(),
-                           *reglas_costos(config_costos))).ejecutar(hechos)
+                           *reglas_costos(config_costos),
+                           *(reglas_ambiente(ambiente) if ambiente else ()))).ejecutar(hechos)
         costos = costos_desde_hechos(mina, resultado)
         if args.hasta and not args.desde:
             raise ValueError("--hasta requiere al menos un origen --desde")
@@ -70,7 +78,7 @@ def main():
                  for id, origen in origenes]
         rutas_base = []
         if args.comparar or escenario:
-            base = costos_linea_base(mina, hechos, cargar_umbrales_co(umbrales)["alerta"])
+            base = costos_linea_base(mina, hechos, cargar_umbrales_co(umbrales)["alerta"], ambiente)
             rutas_base = [(id, origen, ruta_menor_costo(mina, origen, destinos, base))
                           for id, origen in origenes]
     except (OSError, UnicodeError, ValueError, RuntimeError) as error:

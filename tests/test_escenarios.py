@@ -18,7 +18,7 @@ ESCENARIOS = RAIZ / "data/escenarios"
 def datos():
     ruta = ESCENARIOS / "co_moderado.json"
     datos = json.loads(ruta.read_text(encoding="utf-8"))
-    for clave in ("mina", "umbrales", "costos"):
+    for clave in ("mina", "umbrales", "costos", "ambiente"):
         datos[clave] = str((ruta.parent / datos[clave]).resolve())
     return datos
 

@@ -180,3 +180,200 @@ Cadena mínima de CO para el entregable del sprint 1. Las tres reglas se instanc
 | Tipo de fuente | SUPUESTO |
 | Justificación | Aumenta la penalización respecto a la alerta. Si R03 cierra el túnel, el cierre domina. |
 | Prueba | `tests/test_conocimiento.py::test_reglas_costos_co` |
+
+## Ampliación de gases y ventilación
+
+R08–R23 leen umbrales y factores de data/configuracion/ambiente.json. Usan comparaciones estrictas; para deficiencia de O₂ se usa < en vez de >. Se reutilizan las referencias del catálogo, sin afirmar una nueva verificación normativa.
+
+### R08 — Alerta por NO₂
+
+| Campo | Valor |
+|---|---|
+| Categoría | DIAG |
+| SI | no2_ppm > gases.no2_ppm.alerta |
+| ENTONCES | Añadir alerta_no2_ppm=True y multiplicador=factores.alerta |
+| Prioridad | 30 |
+| Fuente | Anexo 15, ítem 21; D09/D12: 3, 5 y 10 ppm |
+| Tipo de fuente | SUPUESTO: política de simulación basada en los límites ocupacionales citados |
+| Justificación | Penaliza sin cerrar en el primer escalón de la simulación. |
+| Prueba | tests/test_ambiente.py::test_cadenas_y_fronteras_gases |
+### R09 — Riesgo alto por NO₂
+
+| Campo | Valor |
+|---|---|
+| Categoría | RIESGO |
+| SI | alerta_no2_ppm==True y no2_ppm > gases.no2_ppm.riesgo_alto, misma entidad |
+| ENTONCES | Añadir riesgo_alto_no2_ppm=True y multiplicador=factores.riesgo_alto |
+| Prioridad | 20 |
+| Fuente | Anexo 15, ítem 21; D09/D12: 3, 5 y 10 ppm |
+| Tipo de fuente | SUPUESTO: política de simulación basada en los límites ocupacionales citados |
+| Justificación | Encadena el segundo escalón; los factores se combinan por máximo. |
+| Prueba | tests/test_ambiente.py::test_cadenas_y_fronteras_gases |
+### R10 — Cierre por peligro inmediato de NO₂
+
+| Campo | Valor |
+|---|---|
+| Categoría | RUTA |
+| SI | riesgo_alto_no2_ppm==True y no2_ppm > gases.no2_ppm.peligro_inmediato, misma entidad |
+| ENTONCES | Añadir cerrado=True |
+| Prioridad | 10 |
+| Fuente | Anexo 15, ítem 21; D09/D12: 3, 5 y 10 ppm; peligro inmediato como supuesto |
+| Tipo de fuente | SUPUESTO: política de simulación basada en los límites ocupacionales citados |
+| Justificación | Reserva el cierre para el último escalón del modelo académico. |
+| Prueba | tests/test_ambiente.py::test_cadenas_y_fronteras_gases |
+### R11 — Alerta por CO₂
+
+| Campo | Valor |
+|---|---|
+| Categoría | DIAG |
+| SI | co2_ppm > gases.co2_ppm.alerta |
+| ENTONCES | Añadir alerta_co2_ppm=True y multiplicador=factores.alerta |
+| Prioridad | 30 |
+| Fuente | Anexo 15, ítem 20; D09/D12: 5000, 30000 y 60000 ppm |
+| Tipo de fuente | SUPUESTO: política de simulación basada en los límites ocupacionales citados |
+| Justificación | Penaliza sin cerrar en el primer escalón de la simulación. |
+| Prueba | tests/test_ambiente.py::test_cadenas_y_fronteras_gases |
+### R12 — Riesgo alto por CO₂
+
+| Campo | Valor |
+|---|---|
+| Categoría | RIESGO |
+| SI | alerta_co2_ppm==True y co2_ppm > gases.co2_ppm.riesgo_alto, misma entidad |
+| ENTONCES | Añadir riesgo_alto_co2_ppm=True y multiplicador=factores.riesgo_alto |
+| Prioridad | 20 |
+| Fuente | Anexo 15, ítem 20; D09/D12: 5000, 30000 y 60000 ppm |
+| Tipo de fuente | SUPUESTO: política de simulación basada en los límites ocupacionales citados |
+| Justificación | Encadena el segundo escalón; los factores se combinan por máximo. |
+| Prueba | tests/test_ambiente.py::test_cadenas_y_fronteras_gases |
+### R13 — Cierre por peligro inmediato de CO₂
+
+| Campo | Valor |
+|---|---|
+| Categoría | RUTA |
+| SI | riesgo_alto_co2_ppm==True y co2_ppm > gases.co2_ppm.peligro_inmediato, misma entidad |
+| ENTONCES | Añadir cerrado=True |
+| Prioridad | 10 |
+| Fuente | Anexo 15, ítem 20; D09/D12: 5000, 30000 y 60000 ppm; peligro inmediato como supuesto |
+| Tipo de fuente | SUPUESTO: política de simulación basada en los límites ocupacionales citados |
+| Justificación | Reserva el cierre para el último escalón del modelo académico. |
+| Prueba | tests/test_ambiente.py::test_cadenas_y_fronteras_gases |
+### R14 — Alerta por H₂S
+
+| Campo | Valor |
+|---|---|
+| Categoría | DIAG |
+| SI | h2s_ppm > gases.h2s_ppm.alerta |
+| ENTONCES | Añadir alerta_h2s_ppm=True y multiplicador=factores.alerta |
+| Prioridad | 30 |
+| Fuente | Anexo 15, ítem 5; D09/D12: 10, 15 y 30 ppm |
+| Tipo de fuente | SUPUESTO: política de simulación basada en los límites ocupacionales citados |
+| Justificación | Penaliza sin cerrar en el primer escalón de la simulación. |
+| Prueba | tests/test_ambiente.py::test_cadenas_y_fronteras_gases |
+### R15 — Riesgo alto por H₂S
+
+| Campo | Valor |
+|---|---|
+| Categoría | RIESGO |
+| SI | alerta_h2s_ppm==True y h2s_ppm > gases.h2s_ppm.riesgo_alto, misma entidad |
+| ENTONCES | Añadir riesgo_alto_h2s_ppm=True y multiplicador=factores.riesgo_alto |
+| Prioridad | 20 |
+| Fuente | Anexo 15, ítem 5; D09/D12: 10, 15 y 30 ppm |
+| Tipo de fuente | SUPUESTO: política de simulación basada en los límites ocupacionales citados |
+| Justificación | Encadena el segundo escalón; los factores se combinan por máximo. |
+| Prueba | tests/test_ambiente.py::test_cadenas_y_fronteras_gases |
+### R16 — Cierre por peligro inmediato de H₂S
+
+| Campo | Valor |
+|---|---|
+| Categoría | RUTA |
+| SI | riesgo_alto_h2s_ppm==True y h2s_ppm > gases.h2s_ppm.peligro_inmediato, misma entidad |
+| ENTONCES | Añadir cerrado=True |
+| Prioridad | 10 |
+| Fuente | Anexo 15, ítem 5; D09/D12: 10, 15 y 30 ppm; peligro inmediato como supuesto |
+| Tipo de fuente | SUPUESTO: política de simulación basada en los límites ocupacionales citados |
+| Justificación | Reserva el cierre para el último escalón del modelo académico. |
+| Prueba | tests/test_ambiente.py::test_cadenas_y_fronteras_gases |
+### R17 — Alerta por deficiencia de O₂
+
+| Campo | Valor |
+|---|---|
+| Categoría | DIAG |
+| SI | o2_porcentaje < gases.o2_porcentaje.alerta |
+| ENTONCES | Añadir alerta_o2_porcentaje=True y multiplicador=factores.alerta |
+| Prioridad | 30 |
+| Fuente | Anexo 15, ítem 36 y Art. 246 b); D12: 19,5 %, 18 % y 16 % |
+| Tipo de fuente | SUPUESTO: política de simulación basada en los límites ocupacionales citados |
+| Justificación | Penaliza sin cerrar en el primer escalón de la simulación. |
+| Prueba | tests/test_ambiente.py::test_cadenas_y_fronteras_gases |
+### R18 — Riesgo alto por deficiencia de O₂
+
+| Campo | Valor |
+|---|---|
+| Categoría | RIESGO |
+| SI | alerta_o2_porcentaje==True y o2_porcentaje < gases.o2_porcentaje.riesgo_alto, misma entidad |
+| ENTONCES | Añadir riesgo_alto_o2_porcentaje=True y multiplicador=factores.riesgo_alto |
+| Prioridad | 20 |
+| Fuente | Anexo 15, ítem 36 y Art. 246 b); D12: 19,5 %, 18 % y 16 % |
+| Tipo de fuente | SUPUESTO: política de simulación basada en los límites ocupacionales citados |
+| Justificación | Encadena el segundo escalón; los factores se combinan por máximo. |
+| Prueba | tests/test_ambiente.py::test_cadenas_y_fronteras_gases |
+### R19 — Cierre por peligro inmediato de deficiencia de O₂
+
+| Campo | Valor |
+|---|---|
+| Categoría | RUTA |
+| SI | riesgo_alto_o2_porcentaje==True y o2_porcentaje < gases.o2_porcentaje.peligro_inmediato, misma entidad |
+| ENTONCES | Añadir cerrado=True |
+| Prioridad | 10 |
+| Fuente | Anexo 15, ítem 36 y Art. 246 b); D12: 19,5 %, 18 % y 16 %; peligro inmediato como supuesto |
+| Tipo de fuente | SUPUESTO: política de simulación basada en los límites ocupacionales citados |
+| Justificación | Reserva el cierre para el último escalón del modelo académico. |
+| Prueba | tests/test_ambiente.py::test_cadenas_y_fronteras_gases |
+### R20 — Alerta por exceso de O₂
+
+| Campo | Valor |
+|---|---|
+| Categoría | DIAG |
+| SI | o2_porcentaje > gases.o2_porcentaje.maximo |
+| ENTONCES | Añadir alerta_o2_exceso=True y multiplicador=factores.alerta |
+| Prioridad | 30 |
+| Fuente | Anexo 15, ítem 36: máximo 22,5 %; D26 |
+| Tipo de fuente | SUPUESTO: política de simulación basada en los límites ocupacionales citados |
+| Justificación | Penaliza sin inventar un nivel de cierre por exceso. |
+| Prueba | tests/test_ambiente.py::test_oxigeno_por_exceso_solo_penaliza |
+### R21 — Ventilación por debajo del mínimo general
+
+| Campo | Valor |
+|---|---|
+| Categoría | DIAG |
+| SI | aire_m_min < ventilacion.minimo |
+| ENTONCES | Añadir ventilacion_insuficiente=True y multiplicador=factores.ventilacion |
+| Prioridad | 30 |
+| Fuente | Art. 248: mínimo 20 m/min; D26 |
+| Tipo de fuente | SUPUESTO: política de simulación basada en los límites ocupacionales citados |
+| Justificación | Penaliza el aire insuficiente sin inventar un umbral de cierre. |
+| Prueba | tests/test_ambiente.py::test_ventilacion_fronteras_anfo_y_filtro |
+### R22 — Ventilación por encima del máximo
+
+| Campo | Valor |
+|---|---|
+| Categoría | DIAG |
+| SI | aire_m_min > ventilacion.maximo |
+| ENTONCES | Añadir ventilacion_excesiva=True y multiplicador=factores.ventilacion |
+| Prioridad | 30 |
+| Fuente | Art. 248: máximo 250 m/min; D26 |
+| Tipo de fuente | SUPUESTO: política de simulación basada en los límites ocupacionales citados |
+| Justificación | Distingue el exceso de aire de una condición normal del modelo. |
+| Prueba | tests/test_ambiente.py::test_ventilacion_fronteras_anfo_y_filtro |
+### R23 — Ventilación insuficiente para ANFO
+
+| Campo | Valor |
+|---|---|
+| Categoría | DIAG |
+| SI | uso_anfo==True y aire_m_min < ventilacion.minimo_anfo, misma entidad |
+| ENTONCES | Añadir ventilacion_insuficiente_anfo=True y multiplicador=factores.ventilacion |
+| Prioridad | 30 |
+| Fuente | Art. 248: mínimo 25 m/min con ANFO; D26 |
+| Tipo de fuente | SUPUESTO: política de simulación basada en los límites ocupacionales citados |
+| Justificación | Distingue 22 m/min sin ANFO del mismo valor con ANFO; exige contexto explícito. |
+| Prueba | tests/test_ambiente.py::test_ventilacion_fronteras_anfo_y_filtro |

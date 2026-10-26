@@ -30,6 +30,11 @@ Una entrada por sesión, la más reciente arriba. Tres líneas bastan.
 
 ## Sesiones
 
+### 2026-10-26 · Gases y ventilación configurables · duración no registrada
+- Hice: añadí NO₂, CO₂, H₂S, O₂ y velocidad del aire con uso explícito de ANFO, configuración ambiente.json, R08–R23 y D26. Amplié la línea base con los mismos sensores y añadí un cuarto escenario reproducible de ventilación con ANFO. Las 23 reglas coinciden con el catálogo y sus referencias a pruebas. Pasaron 307 pruebas y la comprobación de dependencias.
+- Falló / dudas: ninguna falla en los casos ejecutados. No se hizo una nueva verificación normativa; se reutilizan las fuentes del catálogo y se distinguen los supuestos de emergencia. La ventilación y el exceso de O₂ penalizan sin inventar umbrales de cierre; el filtro directo conserva su política distinta. La mina sigue teniendo ocho nodos y aún no hay evidencia de riesgos vecinos detectados por encadenamiento.
+- Siguiente paso exacto: ampliar la mina a 15–20 nodos manteniendo D10, preparar el conocimiento explícito de relaciones entre túneles y probar un escenario donde el motor deduzca un riesgo vecino que el filtro local no capture. Mantener pendiente el cierre real de Nivel 1 y las capacidades de Nivel 2.
+
 ### 2026-10-26 · Escenarios JSON y línea base · duración no registrada
 - Hice: implementé escenarios portables con mineros identificados y hechos originales, tres casos (CO moderado, incendio con desvío y derrumbe con aislamiento), y Dijkstra con filtro directo por CO/eventos independiente del motor. Añadí comparación manual y automática en escenarios, D25 y documentación de políticas y límites. Pasaron 262 pruebas, incluidas ejecuciones de los tres casos desde fuera del checkout.
 - Falló / dudas: ninguna falla en los casos ejecutados. La diferencia en CO moderado refleja políticas distintas, no una superioridad demostrada por encadenamiento. Siguen siete reglas y ocho nodos; aún faltan cobertura de gases/ventilación, al menos 15 reglas, mina ampliada y el caso de riesgos vecinos. Las métricas de exposición y tiempo no se han implementado ni se infieren de los costos.

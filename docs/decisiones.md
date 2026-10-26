@@ -140,3 +140,9 @@ Formato: fecha · decisión · alternativas consideradas · por qué.
 **Alternativas:** depender del directorio de ejecución; mezclar silenciosamente archivos y opciones; comparar contra Dijkstra sin filtro; usar las conclusiones del motor en la línea base.
 **Por qué:** hace reproducible el experimento y conserva la independencia del comparador. El cierre directo por límite ocupacional es una política académica explícita, no una orden normativa de emergencia. Diferencias por políticas no acreditan por sí solas superioridad del sistema; falta demostrar el aporte del encadenamiento sobre riesgos vecinos.
 
+## D26 — Ambiente configurable y contexto explícito de ANFO
+**Fecha:** 2026-10-26
+**Decisión:** añadir NO₂, CO₂, H₂S, O₂ y aire, con umbrales y factores en ambiente.json. Conservar tres escalones para gases; solo el último cierra. Exceso de O₂ y aire fuera de rango penalizan sin inventar umbrales de cierre. Exigir uso_anfo booleano por túnel para evaluar aire. Ampliar el filtro de la línea base a los mismos sensores. Aceptar ambiente como ruta opcional en escenarios versión 1; sin ella solo se admiten las entradas previas de CO y eventos.
+**Alternativas:** asumir ANFO=False si falta; usar siempre el mínimo general; ignorar sensores nuevos en la línea base; cerrar por cualquier desviación en ambos enfoques.
+**Por qué:** conserva los límites documentados y evita decisiones silenciosas ante falta de contexto. Se distinguen los valores ocupacionales de las políticas académicas de clasificación, penalización y cierre. Los factores se combinan por máximo sin modificar las longitudes.
+

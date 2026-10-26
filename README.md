@@ -26,6 +26,7 @@ Este README es la portada. La documentación se lee como un informe, en orden:
 15. [Sprint 1: cargador y motor mínimo](docs/plan/entregable-minimo.md)
 16. [Sprint 2: costos y rutas con Dijkstra](docs/plan/rutas-costos.md)
 17. [Sprint 2: escenarios y línea base](docs/plan/escenarios-comparacion.md)
+18. [Sprint 2: gases y ventilación](docs/plan/gases-ventilacion.md)
 
 ### Parte II — Desarrollo (un capítulo por semana)
 - [Semana 1](docs/capitulos/semana-01.md)
@@ -61,7 +62,7 @@ mina-experta/
 
 ## Ejecución
 
-La consola carga la mina, ejecuta siete reglas con traza y calcula rutas con Dijkstra y costos dinámicos. Incluye tres escenarios JSON con mineros identificados y comparación con una línea base filtrada. Todavía faltan reglas, ampliar la mina y demostrar el caso de razonamiento sobre riesgos vecinos para completar Nivel 1. Desde la raíz del repositorio, con el entorno virtual preparado:
+La consola carga la mina, ejecuta 23 reglas con traza y calcula rutas con Dijkstra y costos dinámicos. Incluye CO, NO₂, CO₂, H₂S, O₂, ventilación y eventos, cuatro escenarios JSON con mineros identificados y una línea base filtrada. Todavía falta ampliar la mina y demostrar el razonamiento sobre riesgos vecinos para completar Nivel 1. Desde la raíz del repositorio, con el entorno virtual preparado:
 
 ```bash
 .venv/bin/python -m pip install -e . -r requirements-dev.txt

@@ -4,6 +4,8 @@
 
 Este bloque implementa S2-H06 y S2-H09 y amplía la consola S2-H08. Cada escenario define una instantánea de hechos y las ubicaciones de mineros identificados. Ambos enfoques reciben la misma mina, hechos originales, ubicaciones y destinos.
 
+**Avance posterior:** la [ampliación de ambiente](gases-ventilacion.md) añade gases, ventilación y un cuarto escenario ANFO, con la misma cobertura en la línea base. Las cifras de 262 pruebas corresponden a la sesión inicial.
+
 ## Ejecutar los tres casos
 
 Con Python 3.12 y el entorno virtual activado, desde la raíz del repositorio:
@@ -57,7 +59,7 @@ Todos los campos de la tabla son obligatorios. No se admiten campos extra ni cla
 
 Las tres rutas de archivo se interpretan respecto al directorio del escenario, no al directorio desde el que se ejecuta Python. Pasar una ruta absoluta a `--escenario` permite ejecutarlo desde otro directorio con el paquete instalado.
 
-Las entidades deben ser túneles existentes. Solo se admiten `co_ppm` (número finito no negativo), `incendio_reportado` y `derrumbe_reportado` (booleanos). No se permite inyectar inferencias como `cerrado` o `multiplicador`. Una misma entidad puede tener atributos distintos, pero no dos lecturas del mismo atributo. Dos mineros distintos pueden compartir nodo.
+Las entidades deben ser túneles existentes. Además de CO y eventos, se admiten no2_ppm, co2_ppm, h2s_ppm, o2_porcentaje, aire_m_min y uso_anfo con configuración de ambiente. El campo opcional ambiente apunta a un archivo relativo al escenario, como las otras rutas. Las mediciones son finitas y no negativas (O₂ hasta 100 %); eventos y ANFO son booleanos. El aire requiere contexto de ANFO por túnel. No se permite inyectar inferencias como cerrado o multiplicador ni repetir un atributo y entidad. Dos mineros distintos pueden compartir nodo.
 
 `--escenario` no se mezcla con archivos u observaciones manuales, orígenes o destinos manuales: el programa rechaza esa combinación para que el experimento conserve sus datos definidos. `--comparar` sí se permite, aunque en escenarios ya está activado.
 
