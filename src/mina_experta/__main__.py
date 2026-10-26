@@ -11,16 +11,22 @@ from .planificador import costos_desde_hechos, ruta_menor_costo
 from .relaciones import cargar_relaciones, hechos_relaciones, reglas_vecindad
 
 
+def _ruta_no_vacia(valor):
+    if not valor.strip():
+        raise argparse.ArgumentTypeError("La ruta no puede estar vacía")
+    return valor
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--mina")
-    parser.add_argument("--umbrales")
-    parser.add_argument("--costos")
-    parser.add_argument("--ambiente")
-    parser.add_argument("--relaciones")
+    parser.add_argument("--mina", type=_ruta_no_vacia)
+    parser.add_argument("--umbrales", type=_ruta_no_vacia)
+    parser.add_argument("--costos", type=_ruta_no_vacia)
+    parser.add_argument("--ambiente", type=_ruta_no_vacia)
+    parser.add_argument("--relaciones", type=_ruta_no_vacia)
     parser.add_argument("--explicar", action="append", default=[], metavar="TUNEL",
                         help="Mostrar las justificaciones directas de sus cierres y penalizaciones")
-    parser.add_argument("--escenario", metavar="ARCHIVO")
+    parser.add_argument("--escenario", type=_ruta_no_vacia, metavar="ARCHIVO")
     parser.add_argument("--comparar", action="store_true",
                         help="Mostrar también Dijkstra con filtro directo por umbral")
     parser.add_argument("--desde", action="append", default=[], metavar="NODO",

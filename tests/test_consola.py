@@ -97,3 +97,13 @@ def test_comparacion_manual():
     assert salida.returncode == 0, salida.stderr
     assert "costo 570" in salida.stdout
     assert "Línea base desde n5: SIN RUTA" in salida.stdout
+
+
+@pytest.mark.parametrize("opcion", ["--mina", "--umbrales", "--costos", "--ambiente",
+                                    "--relaciones", "--escenario"])
+@pytest.mark.parametrize("ruta", ["", "   "])
+def test_ruta_vacia_no_activa_predeterminados(opcion, ruta):
+    salida = ejecutar(opcion, ruta)
+    assert salida.returncode == 2
+    assert "La ruta no puede estar vacía" in salida.stderr
+    assert "Mina:" not in salida.stdout
