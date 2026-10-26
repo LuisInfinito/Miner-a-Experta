@@ -38,15 +38,20 @@ class Condicion:
     atributo: str
     operador: str
     valor: Valor
+    entidad: str | None = None
 
     def __post_init__(self):
         _clave(("ejemplo", self.atributo, self.valor))
+        if self.entidad is not None:
+            _clave((self.entidad, self.atributo, self.valor))
         if self.operador not in ("eq", "gt", "ge", "lt", "le"):
             raise ValueError(f"Operador desconocido: {self.operador}")
         if self.operador != "eq" and type(self.valor) not in (int, float):
             raise ValueError("Las comparaciones ordenadas requieren números")
 
     def cumple(self, hecho: Hecho) -> bool:
+        if self.entidad is not None and hecho[0] != self.entidad:
+            return False
         if hecho[1] != self.atributo:
             return False
         valor = hecho[2]
@@ -69,12 +74,15 @@ class Regla:
     condiciones: tuple[Condicion, ...]
     conclusiones: tuple[tuple[str, Valor], ...]
     prioridad: int = 0
+    entidad: str | None = None
 
     def __post_init__(self):
         if not isinstance(self.id, str) or not self.id.strip():
             raise ValueError("La regla requiere identificador")
         if type(self.prioridad) is not int:
             raise ValueError("La prioridad debe ser entera")
+        if self.entidad is not None:
+            _clave((self.entidad, "destino_regla", True))
         object.__setattr__(self, "condiciones", tuple(self.condiciones))
         object.__setattr__(self, "conclusiones", tuple(tuple(c) for c in self.conclusiones))
         if not self.condiciones or not self.conclusiones:
@@ -121,7 +129,7 @@ class Resultado:
 class Motor:
     """Una ejecución nueva reconstruye memoria, disparos y traza desde cero.
 
-    Todas las condiciones de una activación se evalúan sobre la misma entidad.
+    Las condiciones son locales salvo que declaren una entidad explícita.
     Solo se añaden hechos; no hay retractación ni efectos externos.
     """
 
@@ -136,9 +144,10 @@ class Motor:
             memoria[_clave(hecho)] = hecho
         activaciones = []
         for regla in sorted(self.reglas, key=lambda r: (-r.prioridad, r.id)):
-            for entidad in sorted({h[0] for h in memoria.values()}):
+            entidades = sorted({h[0] for h in memoria.values()})
+            for entidad in ((regla.entidad,) if regla.entidad is not None else entidades):
                 opciones = [tuple(h for h in memoria.values()
-                                  if h[0] == entidad and condicion.cumple(h))
+                                  if h[0] == (condicion.entidad or entidad) and condicion.cumple(h))
                             for condicion in regla.condiciones]
                 for antecedentes in product(*opciones):
                     activaciones.append(Activacion(regla, entidad, antecedentes))

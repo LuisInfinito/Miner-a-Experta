@@ -6,6 +6,8 @@ Este bloque implementa S2-H06 y S2-H09 y amplía la consola S2-H08. Cada escenar
 
 **Avance posterior:** la [ampliación de ambiente](gases-ventilacion.md) añade gases, ventilación y un cuarto escenario ANFO, con la misma cobertura en la línea base. Las cifras de 262 pruebas corresponden a la sesión inicial.
 
+El [punto de control de Nivel 1](nivel1-verificacion.md) añade otros tres escenarios sobre una mina de 16 nodos. El campo opcional relaciones apunta a conocimiento dirigido entre túneles, se resuelve respecto al escenario y no se admite como lectura inyectada. --explicar TUNEL puede usarse con cualquier escenario para consultar las justificaciones directas de efectos de ruta.
+
 ## Ejecutar los tres casos
 
 Con Python 3.12 y el entorno virtual activado, desde la raíz del repositorio:

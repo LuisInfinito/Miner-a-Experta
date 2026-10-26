@@ -8,6 +8,7 @@ from .escenarios import cargar_escenario, validar_lecturas
 from .linea_base import costos_linea_base
 from .motor import Motor
 from .planificador import costos_desde_hechos, ruta_menor_costo
+from .relaciones import cargar_relaciones, hechos_relaciones, reglas_vecindad
 
 
 def main():
@@ -16,6 +17,9 @@ def main():
     parser.add_argument("--umbrales")
     parser.add_argument("--costos")
     parser.add_argument("--ambiente")
+    parser.add_argument("--relaciones")
+    parser.add_argument("--explicar", action="append", default=[], metavar="TUNEL",
+                        help="Mostrar las justificaciones directas de sus cierres y penalizaciones")
     parser.add_argument("--escenario", metavar="ARCHIVO")
     parser.add_argument("--comparar", action="store_true",
                         help="Mostrar también Dijkstra con filtro directo por umbral")
@@ -37,7 +41,8 @@ def main():
         if args.escenario:
             if (args.desde or args.hasta or args.co or args.incendio or args.derrumbe
                     or args.no2 or args.co2 or args.h2s or args.o2 or args.aire or args.anfo or args.sin_anfo
-                    or any(v is not None for v in (args.mina, args.umbrales, args.costos, args.ambiente))):
+                    or any(v is not None for v in (args.mina, args.umbrales, args.costos, args.ambiente,
+                                                   args.relaciones))):
                 raise ValueError("--escenario no se mezcla con entradas manuales")
             escenario = cargar_escenario(args.escenario)
         mina = escenario.mina if escenario else cargar_mina(args.mina or "data/mina_prueba.json")
@@ -46,6 +51,8 @@ def main():
         config_ambiente = (escenario.ambiente if escenario
                            else args.ambiente or "data/configuracion/ambiente.json")
         ambiente = cargar_ambiente(config_ambiente) if config_ambiente else None
+        archivo_relaciones = escenario.relaciones if escenario else args.relaciones
+        relaciones = cargar_relaciones(archivo_relaciones, mina) if archivo_relaciones else ()
         hechos = []
         for atributo, lecturas in (("co_ppm", args.co), ("no2_ppm", args.no2),
             ("co2_ppm", args.co2), ("h2s_ppm", args.h2s),
@@ -67,8 +74,11 @@ def main():
             raise ValueError("El escenario requiere un archivo ambiente para estas lecturas")
         resultado = Motor((*reglas_co(umbrales), *reglas_eventos(),
                            *reglas_costos(config_costos),
-                           *(reglas_ambiente(ambiente) if ambiente else ()))).ejecutar(hechos)
+                           *(reglas_ambiente(ambiente) if ambiente else ()),
+                           *reglas_vecindad(relaciones))).ejecutar((*hechos, *hechos_relaciones(relaciones)))
         costos = costos_desde_hechos(mina, resultado)
+        if any(entidad not in mina.aristas for entidad in args.explicar):
+            raise ValueError("El túnel solicitado para explicar no existe")
         if args.hasta and not args.desde:
             raise ValueError("--hasta requiere al menos un origen --desde")
         origenes = ([(m.id, m.nodo) for m in escenario.mineros] if escenario
@@ -78,7 +88,8 @@ def main():
                  for id, origen in origenes]
         rutas_base = []
         if args.comparar or escenario:
-            base = costos_linea_base(mina, hechos, cargar_umbrales_co(umbrales)["alerta"], ambiente)
+            base = costos_linea_base(mina, hechos, cargar_umbrales_co(umbrales)["alerta"], ambiente,
+                                     relaciones)
             rutas_base = [(id, origen, ruta_menor_costo(mina, origen, destinos, base))
                           for id, origen in origenes]
     except (OSError, UnicodeError, ValueError, RuntimeError) as error:
@@ -90,6 +101,14 @@ def main():
     for paso in resultado.traza:
         print(f"{paso.regla_id} [{paso.entidad}]: {paso.antecedentes} -> {paso.conclusiones}")
     print(f"Disparos: {len(resultado.traza)}")
+    for entidad in args.explicar:
+        print(f"Explicación de {entidad}:")
+        pasos = [p for p in resultado.traza if p.entidad == entidad
+                 and any(a in ("cerrado", "multiplicador") for _, a, _ in p.conclusiones)]
+        if not pasos:
+            print("  Sin efectos de ruta inferidos.")
+        for paso in pasos:
+            print(f"  {paso.regla_id}: {paso.antecedentes} -> {paso.conclusiones}")
     if not rutas:
         print("Sin origen --desde: no se calcularon rutas.")
     for etiqueta, recorridos in (("Ruta", rutas), ("Línea base", rutas_base)):

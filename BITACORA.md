@@ -30,6 +30,11 @@ Una entrada por sesión, la más reciente arriba. Tres líneas bastan.
 
 ## Sesiones
 
+### 2026-10-26 · Punto de control técnico de Nivel 1 · duración no registrada
+- Hice: añadí mina_nivel1.json con 16 nodos, 20 túneles, dos cotas subterráneas, dos salidas y tres refugios. Los cuatro frentes tienen refugio a 150, 220, 60 y 100 m. Implementé relaciones dirigidas de humo, condiciones con entidades explícitas, R24/R25 y explicación por consola. Tres escenarios nuevos corren de punta a punta. En el control de riesgo vecino, la base cruza el vecino en una ruta de 420 m; el motor lo evita en una de 500 m, y desactivar solo vecindad recupera la ruta de la base. Pasaron 322 pruebas.
+- Falló / dudas: ninguna falla en los casos ejecutados. La relación de humo es un supuesto de un salto, no simulación física ni prueba de seguridad real. La mina de práctica se conserva. No se han integrado ramas a main ni creado tags; la revisión académica, horas y cierre semanal no se acreditan automáticamente.
+- Siguiente paso exacto: revisar el punto de control funcional documentado, integrar el avance acumulado cuando el usuario cierre la sesión y preparar Nivel 2 según el plan: certeza, conflictos, decisiones y A*. Mantener explícita la diferencia entre validación técnica y evaluación real del modelo.
+
 ### 2026-10-26 · Gases y ventilación configurables · duración no registrada
 - Hice: añadí NO₂, CO₂, H₂S, O₂ y velocidad del aire con uso explícito de ANFO, configuración ambiente.json, R08–R23 y D26. Amplié la línea base con los mismos sensores y añadí un cuarto escenario reproducible de ventilación con ANFO. Las 23 reglas coinciden con el catálogo y sus referencias a pruebas. Pasaron 307 pruebas y la comprobación de dependencias.
 - Falló / dudas: ninguna falla en los casos ejecutados. No se hizo una nueva verificación normativa; se reutilizan las fuentes del catálogo y se distinguen los supuestos de emergencia. La ventilación y el exceso de O₂ penalizan sin inventar umbrales de cierre; el filtro directo conserva su política distinta. La mina sigue teniendo ocho nodos y aún no hay evidencia de riesgos vecinos detectados por encadenamiento.

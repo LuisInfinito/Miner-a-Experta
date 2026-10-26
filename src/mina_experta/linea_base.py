@@ -4,9 +4,12 @@ from types import MappingProxyType
 
 from .escenarios import validar_lecturas
 from .modelo import _validar_numero
+from .relaciones import validar_relaciones
 
 
-def costos_linea_base(mina, hechos, limite_co, ambiente=None):
+def costos_linea_base(mina, hechos, limite_co, ambiente=None, relaciones=()):
+    # Mismo conocimiento de relaciones disponible; el filtro local no infiere con él.
+    validar_relaciones(mina, relaciones)
     _validar_numero(limite_co, "limite_co")
     if limite_co <= 0:
         raise ValueError("El límite de CO debe ser positivo")

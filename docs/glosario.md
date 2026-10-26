@@ -112,6 +112,8 @@ Todas las siglas y términos técnicos usados en el proyecto, explicados para qu
 | **Hecho derivado** | Hecho que no venía de los sensores, sino que fue concluido por una regla. |
 | **Memoria de trabajo** | Conjunto de hechos conocidos en el momento actual. |
 | **Activación de una regla** | Regla junto con una entidad y los hechos concretos que satisfacen todas sus condiciones; puede dispararse si no fue ejecutada ya con esos antecedentes. |
+| **Instancia de regla** | Versión concreta de una regla conceptual para una relación o entidad. R24 se instancia por par de túneles con identificadores únicos, conservando una sola definición conceptual en el catálogo. |
+| **Relación dirigida de exposición** | Conocimiento declarado de que un foco en un túnel puede exponer otro en un sentido concreto. No se deduce del tránsito bidireccional ni demuestra ventilación física. |
 | **Escalar JSON** | Un valor simple: texto, número, booleano o `null`; no una lista ni un objeto. |
 | **Instantánea de hechos** | Datos correspondientes a una ejecución independiente; no mezcla automática de lecturas tomadas en momentos distintos. |
 | **Motor de inferencia** | Programa genérico que aplica las reglas a los hechos para obtener conclusiones. |

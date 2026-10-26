@@ -57,6 +57,7 @@ class Escenario:
     destinos: tuple[str, ...]
     hechos: tuple[Hecho, ...]
     ambiente: Path | None = None
+    relaciones: Path | None = None
 
 
 def cargar_escenario(ruta: str | Path) -> Escenario:
@@ -65,7 +66,8 @@ def cargar_escenario(ruta: str | Path) -> Escenario:
         with ruta.open(encoding="utf-8") as archivo:
             datos = json.load(archivo, object_pairs_hook=_objeto_sin_repeticiones,
                               parse_constant=_rechazar_constante)
-        opcionales = ("ambiente",) if isinstance(datos, dict) and "ambiente" in datos else ()
+        opcionales = tuple(k for k in ("ambiente", "relaciones")
+                           if isinstance(datos, dict) and k in datos)
         _campos(datos, ("version", "nombre", "mina", "umbrales", "costos",
                         "mineros", "destinos", "hechos") + opcionales, "escenario")
         if type(datos["version"]) is not int or datos["version"] != 1:
@@ -104,6 +106,7 @@ def cargar_escenario(ruta: str | Path) -> Escenario:
         hechos = validar_lecturas(mina, hechos)
         return Escenario(datos["nombre"], mina, ruta.parent / datos["umbrales"],
                          ruta.parent / datos["costos"], tuple(mineros), tuple(destinos), hechos,
-                         ruta.parent / datos["ambiente"] if opcionales else None)
+                         ruta.parent / datos["ambiente"] if "ambiente" in datos else None,
+                         ruta.parent / datos["relaciones"] if "relaciones" in datos else None)
     except (OSError, UnicodeError, ValueError) as error:
         raise ValueError(f"No se pudo cargar el escenario {ruta}: {error}") from error

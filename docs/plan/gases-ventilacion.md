@@ -4,6 +4,8 @@
 
 Se añadieron R08–R23: NO₂, CO₂, H₂S, deficiencia y exceso de O₂, y aire con contexto de ANFO. Hay **23 reglas** en el [catálogo](../reglas.md), con sus referencias a pruebas. Superar las 15 reglas no acredita por sí solo todo el Nivel 1.
 
+**Avance posterior:** la [verificación de Nivel 1](nivel1-verificacion.md) añade la mina de 16 nodos y R24/R25 de exposición vecina. Los 23 tipos y 307 resultados de esta guía corresponden a la sesión de gases y ventilación.
+
 ## Umbrales y fuentes
 
 [ambiente.json](../../data/configuracion/ambiente.json) contiene los nuevos umbrales, límites y factores; CO conserva sus archivos anteriores. No se escriben umbrales numéricos dentro del motor.

@@ -27,6 +27,7 @@ Este README es la portada. La documentación se lee como un informe, en orden:
 16. [Sprint 2: costos y rutas con Dijkstra](docs/plan/rutas-costos.md)
 17. [Sprint 2: escenarios y línea base](docs/plan/escenarios-comparacion.md)
 18. [Sprint 2: gases y ventilación](docs/plan/gases-ventilacion.md)
+19. [Nivel 1: mina ampliada y verificación](docs/plan/nivel1-verificacion.md)
 
 ### Parte II — Desarrollo (un capítulo por semana)
 - [Semana 1](docs/capitulos/semana-01.md)
@@ -62,10 +63,11 @@ mina-experta/
 
 ## Ejecución
 
-La consola carga la mina, ejecuta 23 reglas con traza y calcula rutas con Dijkstra y costos dinámicos. Incluye CO, NO₂, CO₂, H₂S, O₂, ventilación y eventos, cuatro escenarios JSON con mineros identificados y una línea base filtrada. Todavía falta ampliar la mina y demostrar el razonamiento sobre riesgos vecinos para completar Nivel 1. Desde la raíz del repositorio, con el entorno virtual preparado:
+La consola dispone de 25 tipos de regla, traza, explicación directa y rutas con Dijkstra y costos dinámicos. El punto de control técnico de Nivel 1 incluye una mina de 16 nodos y tres escenarios completos, además de cuatro ejemplos de práctica. Un caso controlado muestra cómo el motor evita un vecino expuesto a humo que el filtro local no identifica. Las capacidades de Nivel 2 siguen pendientes. Desde la raíz del repositorio, con el entorno virtual preparado:
 
 ```bash
 .venv/bin/python -m pip install -e . -r requirements-dev.txt
+.venv/bin/python -m mina_experta --escenario data/escenarios/nivel1_riesgo_vecino.json --explicar tunel_10_12
 .venv/bin/python -m mina_experta --desde n5 --co tunel_3_4=120
 .venv/bin/python -m mina_experta --escenario data/escenarios/co_moderado.json
 .venv/bin/python ejercicios/nivelacion.py

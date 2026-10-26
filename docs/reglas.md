@@ -135,7 +135,7 @@ Cadena mínima de CO para el entregable del sprint 1. Las tres reglas se instanc
 |---|---|
 | Categoría | RUTA |
 | SI | `incendio_reportado == True` |
-| ENTONCES | Añadir `(entidad, cerrado, True)` |
+| ENTONCES | Añadir `(entidad, cerrado, True)` y `(entidad, foco_incendio, True)` |
 | Prioridad | 100 |
 | Fuente | Política académica del proyecto para el evento de incendio |
 | Tipo de fuente | SUPUESTO |
@@ -377,3 +377,31 @@ R08–R23 leen umbrales y factores de data/configuracion/ambiente.json. Usan com
 | Tipo de fuente | SUPUESTO: política de simulación basada en los límites ocupacionales citados |
 | Justificación | Distingue 22 m/min sin ANFO del mismo valor con ANFO; exige contexto explícito. |
 | Prueba | tests/test_ambiente.py::test_ventilacion_fronteras_anfo_y_filtro |
+
+### R24 — Exposición a humo en un túnel relacionado
+
+| Campo | Valor |
+|---|---|
+| Categoría | RIESGO |
+| SI | El origen tiene foco_incendio=True y el destino tiene recibe_humo_de=origen, según una relación dirigida configurada |
+| ENTONCES | Añadir (destino, expuesto_humo, True) |
+| Prioridad | 40 |
+| Fuente | D27: relación explícita de exposición de un salto en relaciones_humo.json |
+| Tipo de fuente | SUPUESTO |
+| Justificación | Deduce un riesgo vecino con antecedente de incendio y conocimiento explícito de exposición; no lo deduce solo por geometría. |
+| Prueba | tests/test_nivel1.py::test_cadena_real_cierra_vecino_y_muestra_sus_antecedentes |
+
+Se instancia como R24_ORIGEN__DESTINO para distinguir cada par en el motor y su refracción. Una exposición no crea un nuevo foco de incendio.
+
+### R25 — Cierre por exposición a humo deducida
+
+| Campo | Valor |
+|---|---|
+| Categoría | RUTA |
+| SI | expuesto_humo=True en la entidad |
+| ENTONCES | Añadir (entidad, cerrado, True) |
+| Prioridad | 35 |
+| Fuente | D27: política académica sobre la exposición inferida |
+| Tipo de fuente | SUPUESTO |
+| Justificación | Permite que el planificador evite el vecino identificado por el razonamiento, aun con lectura local normal. |
+| Prueba | tests/test_nivel1.py::test_cadena_real_cierra_vecino_y_muestra_sus_antecedentes |

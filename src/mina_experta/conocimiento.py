@@ -12,7 +12,7 @@ def reglas_eventos() -> tuple[Regla, ...]:
     """Cierres por eventos reportados; supuestos R04/R05, sin geomecánica."""
     return (
         Regla("R04", (Condicion("incendio_reportado", "eq", True),),
-              (("cerrado", True),), 100),
+              (("cerrado", True), ("foco_incendio", True)), 100),
         Regla("R05", (Condicion("derrumbe_reportado", "eq", True),),
               (("cerrado", True),), 100),
     )

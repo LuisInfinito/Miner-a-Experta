@@ -146,3 +146,9 @@ Formato: fecha · decisión · alternativas consideradas · por qué.
 **Alternativas:** asumir ANFO=False si falta; usar siempre el mínimo general; ignorar sensores nuevos en la línea base; cerrar por cualquier desviación en ambos enfoques.
 **Por qué:** conserva los límites documentados y evita decisiones silenciosas ante falta de contexto. Se distinguen los valores ocupacionales de las políticas académicas de clasificación, penalización y cierre. Los factores se combinan por máximo sin modificar las longitudes.
 
+## D27 — Exposición vecina mediante relaciones explícitas de un salto
+**Fecha:** 2026-10-26
+**Decisión:** mantener la mina pequeña y añadir una mina de Nivel 1 de 16 nodos. Definir relaciones dirigidas de exposición a humo en un JSON independiente, con túneles existentes que compartan un nodo. Extender las condiciones y reglas con entidades fijas opcionales. R04 deriva foco_incendio; R24 une el foco de origen con recibe_humo_de en el destino; R25 cierra el vecino expuesto. Instanciar R24 por par, con identificadores únicos y antecedentes completos en la traza. La exposición no crea un foco nuevo. La línea base recibe las relaciones pero sigue siendo un filtro local.
+**Alternativas:** cerrar todos los túneles que compartan un nodo; propagar humo fuera del motor sin registrar antecedentes; tratar exposición como un foco que se propaga indefinidamente.
+**Por qué:** permite verificar el aporte del encadenamiento sin confundir adyacencia geométrica con ventilación física. Es un supuesto explícito, no simulación de fluidos. El control sin reglas vecinas conserva los datos y recupera la ruta de la línea base. Detalles en [el punto de control Nivel 1](plan/nivel1-verificacion.md).
+
